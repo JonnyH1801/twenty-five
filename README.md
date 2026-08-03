@@ -3,14 +3,19 @@
 A birthday site with NFC tags. She taps a tag on her phone, a friend's video opens
 with the line they said about her.
 
+Everything is in Spanish. The design is a cyanotype: Prussian blue ground, white
+botanical specimens, photos that develop as you scroll. See [DESIGN.md](DESIGN.md)
+for why, and [PRODUCT.md](PRODUCT.md) for who it is for.
+
 Plain HTML/CSS/JS. No build step, no framework, no dependencies. Hosted on GitHub Pages.
 
 ---
 
 ## The one file you edit
 
-**`js/content.js`** — every word on the site lives there. Her name, the "true things",
-your letter, and the list of friends. Save it, refresh the page, done.
+**`js/content.js`** — every word on the site lives there, in Spanish. Her name, the
+"cosas ciertas", your letter, the list of friends, and every button label. Save it,
+refresh the page, done.
 
 Everything else (`index.html`, `css/style.css`, `js/app.js`) you can leave alone.
 
@@ -46,16 +51,19 @@ The script prints the exact block to paste. Fill in the words:
 {
   slug: "sofia",
   name: "Sofía",
-  role: "Best friend since forever",
-  phrase: "The one line from her video that you want on the screen.",
+  role: "Mejor amiga de toda la vida",
+  phrase: "La frase de su video que quieres en la pantalla.",
   video: "sofia.mp4",
   poster: "sofia.jpg",
-  accent: "sky",          // sky | azure | cornflower | cream
+  accent: "sky",       // sky | azure | cornflower | cream
+  plant: "fern",       // fern | eucalyptus | seedhead | grass | algae | frond
 },
 ```
 
-Leave `video: null` for anyone who hasn't filmed yet — their card shows up greyed out
-as "coming soon" instead of breaking.
+`plant` is the botanical watermark on the card. Leave it out and one gets assigned.
+
+Leave `video: null` for anyone who hasn't filmed yet. Their card shows up dimmed with
+"Video en camino" instead of breaking.
 
 ### 3. Push it
 
@@ -124,28 +132,27 @@ sips -Z 1600 -s format jpeg -s formatOptions 78 ~/Desktop/new.jpg --out media/ph
 
 ---
 
-## Colours
+## Colours and the drawings
 
-Pulled from her blue swatches. Change them in one place — the `:root` block at the top
-of `css/style.css`.
+Both are documented in [DESIGN.md](DESIGN.md). Colours live in the `:root` block at
+the top of `css/style.css`.
 
-| | |
-|---|---|
-| `--navy-900` `#0B1026` | page background |
-| `--navy` `#131936` | Pantone Neon Navy, from her swatch |
-| `--cobalt` `#2B5FA8` | the voices section |
-| `--azure` `#3D7DCA` | accents |
-| `--corn` `#6B9BD1` | card variant |
-| `--sky` `#A8C8E8` | "FIVE", links, signature |
-| `--cream` `#F3ECE1` | text + the about section |
-| `--clay` `#C9805C` | the one warm accent, used sparingly |
+The six botanical silhouettes are drawn in code, not downloaded. To change or
+re-roll them:
+
+```bash
+node tools/draw-botanicals.mjs
+```
+
+Edit the seed numbers at the bottom of that file to get different plants of the same
+species. It is seeded, so the same numbers always give the same drawing.
 
 ---
 
 ## Repo notes
 
 - `_source/` holds the original full-size photos and the design references.
-  It's gitignored — it doesn't ship, but don't delete it locally.
+  It's gitignored, it doesn't ship, but don't delete it locally.
 - `.nojekyll` stops GitHub Pages from mangling anything. Leave it.
 - GitHub Pages serves the repo root on the `main` branch.
 

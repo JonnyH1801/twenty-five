@@ -1,88 +1,100 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Happy 25th</title>
-<meta name="theme-color" content="#0B1026">
-<meta name="description" content="A birthday somewhere on the internet.">
-<meta property="og:title" content="Happy 25th">
-<meta property="og:description" content="Tap a tag. Someone has something to tell you.">
+<title>Feliz 25</title>
+<meta name="theme-color" content="#07243c">
+<meta name="description" content="Un cumpleaños en algún lugar del internet.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Feliz 25">
+<meta property="og:description" content="Acerca una plaquita. Alguien tiene algo que decirte.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Inter:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;0,6..96,900;1,6..96,500;1,6..96,700&family=Archivo:wght@400;500;600;700&family=Playwrite+ES:wght@200..400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2307243c'/><path d='M50 90V24M50 42l-17-10M50 42l17-10M50 60l-21-12M50 60l21-12M50 78l-15-9M50 78l15-9' stroke='%23dbe9f2' stroke-width='6' stroke-linecap='round' fill='none'/></svg>">
 </head>
-<body>
+<body class="is-loading">
 
-<!-- ============ decorative boho shapes, fixed behind everything ============ -->
-<svg class="bokeh" aria-hidden="true" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
-  <defs>
-    <pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse">
-      <circle cx="1.6" cy="1.6" r="1.6" fill="currentColor"/>
-    </pattern>
-  </defs>
-  <circle class="s1" cx="130" cy="180" r="120" fill="url(#dots)"/>
-  <path class="s2" d="M980 120a110 110 0 0 1 220 0v260h-220z"/>
-  <circle class="s3" cx="1050" cy="720" r="150"/>
-  <path class="s4" d="M-40 640q160-90 320 0t320 0"/>
-  <path class="s4" d="M-40 690q160-90 320 0t320 0"/>
-  <path class="s4" d="M-40 740q160-90 320 0t320 0"/>
+<!-- ===== The cyanotype duotone. Shadows go Prussian, highlights go to
+         the pale of unexposed paper. Every photo on the page uses it. ===== -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <filter id="cyano" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="
+      0.2126 0.7152 0.0722 0 0
+      0.2126 0.7152 0.0722 0 0
+      0.2126 0.7152 0.0722 0 0
+      0      0      0      1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.02 0.07 0.20 0.44 0.72 0.93"/>
+      <feFuncG type="table" tableValues="0.09 0.20 0.39 0.63 0.85 0.97"/>
+      <feFuncB type="table" tableValues="0.21 0.37 0.57 0.78 0.93 1.00"/>
+    </feComponentTransfer>
+  </filter>
 </svg>
 
-<!-- ============ left rail nav (desktop) ============ -->
-<nav class="rail" aria-label="Sections">
-  <a href="#hero"   data-nav>Home</a>
-  <a href="#about"  data-nav>About you</a>
-  <a href="#voices" data-nav>The voices</a>
-  <a href="#letter" data-nav>From me</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ===== navegación ===== -->
+<nav class="rail" aria-label="Secciones">
+  <a href="#hero"   data-nav data-c="ui.navHome"></a>
+  <a href="#about"  data-nav data-c="ui.navAbout"></a>
+  <a href="#voices" data-nav data-c="ui.navVoices"></a>
+  <a href="#letter" data-nav data-c="ui.navLetter"></a>
 </nav>
 
-<!-- ============ mobile menu ============ -->
 <button class="menu-btn" aria-expanded="false" aria-controls="drawer">
   <span class="menu-btn__bars" aria-hidden="true"><i></i><i></i></span>
-  <span class="sr-only">Menu</span>
+  <span class="sr-only" data-c="ui.menu"></span>
 </button>
 <div class="drawer" id="drawer" hidden>
-  <a href="#hero"   data-nav>Home</a>
-  <a href="#about"  data-nav>About you</a>
-  <a href="#voices" data-nav>The voices</a>
-  <a href="#letter" data-nav>From me</a>
+  <span class="bot bot--algae drawer__bot" aria-hidden="true"></span>
+  <a href="#hero"   data-nav data-c="ui.navHome"></a>
+  <a href="#about"  data-nav data-c="ui.navAbout"></a>
+  <a href="#voices" data-nav data-c="ui.navVoices"></a>
+  <a href="#letter" data-nav data-c="ui.navLetter"></a>
 </div>
 
 <main id="main">
 
-  <!-- ================= HERO ================= -->
+  <!-- ================= PORTADA ================= -->
   <section class="hero" id="hero">
+    <span class="bot bot--fern hero__fern" data-drift="0.16" aria-hidden="true"></span>
+    <span class="bot bot--grass hero__grass" data-drift="-0.09" aria-hidden="true"></span>
+
     <div class="wrap hero__grid">
       <div class="hero__type">
         <p class="eyebrow" data-c="hero.eyebrow"></p>
         <h1 class="giant">
-          <span class="giant__l1" data-c="hero.big1"></span>
-          <span class="giant__l2" data-c="hero.big2"></span>
-          <span class="giant__script" data-c="hero.script"></span>
+          <span class="giant__line" data-split data-c="hero.big1"></span>
+          <span class="giant__line giant__line--2" data-split data-c="hero.big2"></span>
         </h1>
-        <p class="hero__name"><span data-c="name"></span><span class="dot">.</span></p>
+        <p class="script" data-c="hero.script"></p>
+        <p class="hero__name"><span data-c="name"></span></p>
         <p class="hero__sub" data-c="hero.subtitle"></p>
-        <p class="hero__date" data-c="birthdayLabel"></p>
+        <p class="hero__date"><span data-c="birthdayLabel"></span></p>
       </div>
 
-      <figure class="hero__photo reveal">
-        <div class="arch">
-          <img src="media/photos/her-1.jpg" alt="" width="1200" height="1600" fetchpriority="high">
+      <figure class="plate hero__plate">
+        <div class="plate__arch">
+          <img class="plate__img" src="media/photos/her-1.jpg" alt="" width="1200" height="1600" fetchpriority="high">
+          <img class="plate__blue" src="media/photos/her-1.jpg" alt="" aria-hidden="true" width="1200" height="1600">
         </div>
-        <span class="ring" aria-hidden="true"></span>
+        <figcaption class="plate__cap">i</figcaption>
+        <span class="bot bot--eucalyptus plate__sprig" aria-hidden="true"></span>
       </figure>
     </div>
 
-    <a class="cue" href="#about"><span data-c="hero.scrollCue"></span> <i aria-hidden="true"></i></a>
+    <a class="cue" href="#about"><span data-c="hero.scrollCue"></span><i aria-hidden="true"></i></a>
   </section>
 
-  <!-- ================= ABOUT ================= -->
+  <!-- ================= COSAS CIERTAS ================= -->
   <section class="about" id="about">
+    <span class="bot bot--seedhead about__seed" data-drift="0.22" aria-hidden="true"></span>
+
     <div class="wrap">
       <header class="sec-head reveal">
         <p class="eyebrow" data-c="about.eyebrow"></p>
@@ -90,13 +102,15 @@
         <p class="lede" data-c="about.intro"></p>
       </header>
 
-      <div class="about__body">
+      <div class="sheet">
         <ol class="things" id="things"></ol>
 
-        <figure class="about__photo reveal">
-          <div class="arch arch--sm">
-            <img src="media/photos/her-2.jpg" alt="" loading="lazy" width="1200" height="1600">
+        <figure class="plate about__plate reveal">
+          <div class="plate__arch">
+            <img class="plate__img" src="media/photos/her-2.jpg" alt="" loading="lazy" width="1200" height="1600">
+            <img class="plate__blue" src="media/photos/her-2.jpg" alt="" aria-hidden="true" loading="lazy" width="1200" height="1600">
           </div>
+          <figcaption class="plate__cap">ii</figcaption>
         </figure>
       </div>
 
@@ -106,10 +120,11 @@
     </div>
   </section>
 
-  <!-- ================= VOICES ================= -->
+  <!-- ================= LAS VOCES ================= -->
   <section class="voices" id="voices">
+    <span class="bot bot--frond voices__frond" data-drift="0.13" aria-hidden="true"></span>
     <div class="wrap">
-      <header class="sec-head sec-head--center reveal">
+      <header class="sec-head reveal">
         <p class="eyebrow" data-c="voices.eyebrow"></p>
         <h2 class="display" data-c="voices.title"></h2>
         <p class="lede" data-c="voices.intro"></p>
@@ -118,13 +133,16 @@
     </div>
   </section>
 
-  <!-- ================= LETTER ================= -->
+  <!-- ================= LA CARTA ================= -->
   <section class="letter" id="letter">
+    <span class="bot bot--algae letter__algae" data-drift="0.18" aria-hidden="true"></span>
     <div class="wrap letter__grid">
-      <figure class="letter__photo reveal">
-        <div class="arch arch--sm">
-          <img src="media/photos/her-3.jpg" alt="" loading="lazy" width="1200" height="1600">
+      <figure class="plate letter__plate reveal">
+        <div class="plate__arch">
+          <img class="plate__img" src="media/photos/her-3.jpg" alt="" loading="lazy" width="1200" height="1600">
+          <img class="plate__blue" src="media/photos/her-3.jpg" alt="" aria-hidden="true" loading="lazy" width="1200" height="1600">
         </div>
+        <figcaption class="plate__cap">iii</figcaption>
       </figure>
       <div class="letter__text reveal">
         <p class="eyebrow" data-c="letter.eyebrow"></p>
@@ -141,11 +159,12 @@
 
 </main>
 
-<!-- ================= VIDEO VIEW (NFC lands here) ================= -->
+<!-- ============ EL REPRODUCTOR — aquí es donde cae la NFC ============ -->
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="playerName">
+  <span class="bot bot--fern player__bot" aria-hidden="true"></span>
   <div class="player__inner">
     <button class="player__close" id="playerClose">
-      <span aria-hidden="true">←</span> <span>All the voices</span>
+      <span aria-hidden="true">←</span><span id="playerBack"></span>
     </button>
 
     <p class="player__role" id="playerRole"></p>
@@ -153,13 +172,11 @@
 
     <div class="player__stage" id="playerStage"></div>
 
-    <blockquote class="player__quote">
-      <p id="playerPhrase"></p>
-    </blockquote>
+    <blockquote class="player__quote"><p id="playerPhrase"></p></blockquote>
 
     <nav class="player__pager">
-      <button id="prevBtn" class="ghost">← Previous</button>
-      <button id="nextBtn" class="ghost">Next →</button>
+      <button id="prevBtn" class="ghost"></button>
+      <button id="nextBtn" class="ghost"></button>
     </nav>
   </div>
 </div>

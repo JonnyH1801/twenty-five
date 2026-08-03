@@ -1,43 +1,49 @@
 /* =========================================================
-   Happy 25th — stylesheet
-   Palette pulled from her blue swatches (Pantone Neon Navy
-   #131936 + Sky/Azure/Cornflower) with a boho cream ground.
+   Cianotipia
+   ---------------------------------------------------------
+   Anna Atkins, 1843: lay the specimen on sensitised paper,
+   leave it in the sun, wash it. Everything the plant covered
+   stays pale, everything else turns Prussian blue.
+
+   That is the whole system here. Blue is not an accent, it
+   is the paper. The plants are the absence of it.
    ========================================================= */
 
 :root{
-  --navy-900:#0B1026;
-  --navy:#131936;
-  --navy-700:#1E2652;
-  --cobalt:#2B5FA8;
-  --azure:#3D7DCA;
-  --corn:#6B9BD1;
-  --sky:#A8C8E8;
-  --ice:#DCEAF7;
-  --cream:#F3ECE1;
-  --cream-2:#E8DECE;
-  --clay:#C9805C;
+  /* the print */
+  --ink:      oklch(0.185 0.052 249);   /* deepest exposure             */
+  --prussian: oklch(0.265 0.068 246);   /* the classic cyanotype blue   */
+  --marine:   oklch(0.375 0.082 243);
+  --wash:     oklch(0.615 0.072 236);
+  --pale:     oklch(0.815 0.045 232);
+  --frost:    oklch(0.930 0.022 228);   /* unexposed paper, the "white" */
 
-  --ink:var(--navy-900);
-  --rail-w:190px;
+  /* the only two things on the page that are not blue */
+  --paper:    oklch(0.947 0.014 88);    /* warm stock, for the letter   */
+  --iron:     oklch(0.685 0.108 62);    /* ferric ochre, used sparingly */
 
-  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
-  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --hand:"Caveat","Bradley Hand",cursive;
+  --rail-w: 200px;
+  --pad: clamp(1.25rem, 5vw, 4rem);
+  --sec-y: clamp(5.5rem, 14vw, 11rem);
 
-  --pad:clamp(1.25rem,5vw,3.5rem);
-  --sec-y:clamp(5rem,13vw,10rem);
+  --display: "Bodoni Moda", Didot, "Times New Roman", serif;
+  --sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --hand: "Playwrite ES", "Snell Roundhand", cursive;
+
+  /* ease-out-expo. nothing on this page bounces. */
+  --expo: cubic-bezier(0.16, 1, 0.30, 1);
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 body{
   margin:0;
+  background:var(--ink);
+  color:var(--frost);
   font-family:var(--sans);
-  background:var(--navy-900);
-  color:var(--cream);
-  line-height:1.6;
+  font-size:clamp(1rem,0.96rem + 0.2vw,1.06rem);
+  line-height:1.65;
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
@@ -46,376 +52,447 @@ body.is-locked{overflow:hidden}
 img{max-width:100%;height:auto;display:block}
 button{font:inherit;color:inherit}
 a{color:inherit}
-
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
 
-.wrap{
-  width:100%;
-  max-width:1180px;
-  margin-inline:auto;
-  padding-inline:var(--pad);
-}
-
-/* ---------- decorative background ---------- */
-.bokeh{
-  position:fixed;inset:0;width:100%;height:100%;
-  z-index:0;pointer-events:none;opacity:.5;
-}
-.bokeh .s1{color:var(--corn);opacity:.35}
-.bokeh .s2{fill:var(--cobalt);opacity:.18}
-.bokeh .s3{fill:none;stroke:var(--sky);stroke-width:1.5;opacity:.3}
-.bokeh .s4{fill:none;stroke:var(--corn);stroke-width:1.2;opacity:.22}
+/* z-index 1 keeps every specimen behind the words. they are
+   wallpaper, not content. */
+.wrap{position:relative;z-index:1;width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--pad)}
 main{position:relative;z-index:1}
+
+/* =========================================================
+   PAPER GRAIN
+   A cyanotype is a physical print on cotton rag. Without
+   tooth, the blue just reads as a CSS background colour.
+   ========================================================= */
+.grain{
+  position:fixed;inset:0;z-index:70;pointer-events:none;
+  opacity:.20;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   THE SPECIMENS
+   Drawn by tools/draw-botanicals.mjs. Used as masks so one
+   file can be any colour at any size.
+   ========================================================= */
+.bot{
+  position:absolute;display:block;pointer-events:none;z-index:0;
+  background-color:currentColor;
+  mask-repeat:no-repeat;mask-size:contain;mask-position:center;
+  -webkit-mask-repeat:no-repeat;-webkit-mask-size:contain;-webkit-mask-position:center;
+  transform-origin:50% 100%;
+  will-change:translate;
+}
+.bot--fern      {mask-image:url(../media/botanical/fern.svg);      -webkit-mask-image:url(../media/botanical/fern.svg);      aspect-ratio:460/620}
+.bot--eucalyptus{mask-image:url(../media/botanical/eucalyptus.svg);-webkit-mask-image:url(../media/botanical/eucalyptus.svg);aspect-ratio:260/460}
+.bot--seedhead  {mask-image:url(../media/botanical/seedhead.svg);  -webkit-mask-image:url(../media/botanical/seedhead.svg);  aspect-ratio:260/300}
+.bot--grass     {mask-image:url(../media/botanical/grass.svg);     -webkit-mask-image:url(../media/botanical/grass.svg);     aspect-ratio:380/260}
+.bot--algae     {mask-image:url(../media/botanical/algae.svg);     -webkit-mask-image:url(../media/botanical/algae.svg);     aspect-ratio:300/420}
+.bot--frond     {mask-image:url(../media/botanical/frond.svg);     -webkit-mask-image:url(../media/botanical/frond.svg);     aspect-ratio:340/380}
+
+/* nothing sways in sync, or the page reads as a carousel.
+   sway uses `rotate` and the scroll drift uses `translate`,
+   which are separate properties, so they compose cleanly. */
+@keyframes sway  {50%{rotate: 1.5deg}}
+@keyframes sway-b{50%{rotate:-1.9deg}}
+.hero__fern    {animation:sway   19s ease-in-out infinite}
+.hero__grass   {animation:sway-b 13s ease-in-out infinite}
+.about__seed   {animation:sway   23s ease-in-out infinite}
+.voices__frond {animation:sway-b 17s ease-in-out infinite}
+.letter__algae {animation:sway   21s ease-in-out infinite}
+.plate__sprig  {animation:sway-b 15s ease-in-out infinite}
 
 /* =========================================================
    NAVIGATION
    ========================================================= */
 .rail{
-  position:fixed;left:var(--pad);top:50%;transform:translateY(-50%);
-  z-index:40;display:none;flex-direction:column;gap:.55rem;
-  mix-blend-mode:difference;
+  position:fixed;left:var(--pad);top:50%;translate:0 -50%;
+  z-index:60;display:none;flex-direction:column;gap:.75rem;
 }
 .rail a{
-  font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  text-decoration:none;color:#fff;opacity:.55;transition:opacity .25s,transform .25s;
+  position:relative;text-decoration:none;color:var(--frost);opacity:.4;
+  font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  transition:opacity .4s var(--expo),translate .4s var(--expo);
 }
-.rail a:hover,.rail a.is-active{opacity:1;transform:translateX(4px)}
-@media (min-width:1080px){.rail{display:flex}}
+.rail a::before{
+  content:"";position:absolute;left:-1.15rem;top:50%;width:.75rem;height:1px;
+  background:currentColor;scale:0 1;transform-origin:right center;
+  transition:scale .4s var(--expo);
+}
+.rail a:hover,.rail a.is-active{opacity:1;translate:4px 0}
+.rail a.is-active::before{scale:1 1;transform-origin:left center}
+@media (min-width:1100px){.rail{display:flex}}
 
 .menu-btn{
-  position:fixed;top:1rem;right:1rem;z-index:60;
-  width:46px;height:46px;border:0;border-radius:50%;
-  background:var(--navy);color:var(--cream);
-  border:1px solid rgb(243 236 225 / .35);
-  display:grid;place-items:center;cursor:pointer;
-  box-shadow:0 6px 24px rgb(0 0 0 / .35);
+  position:fixed;top:1rem;right:1rem;z-index:90;
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
+  background:color-mix(in oklch,var(--ink) 88%,transparent);
+  color:var(--frost);
+  border:1px solid color-mix(in oklch,var(--frost) 30%,transparent);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  display:grid;place-items:center;
 }
-.menu-btn__bars{display:block;width:18px}
-.menu-btn__bars i{display:block;height:2px;background:currentColor;border-radius:2px;transition:transform .3s}
+.menu-btn__bars{display:block;width:17px}
+.menu-btn__bars i{display:block;height:1.5px;background:currentColor;transition:translate .3s var(--expo),rotate .3s var(--expo)}
 .menu-btn__bars i+i{margin-top:5px}
-.menu-btn[aria-expanded="true"] i:first-child{transform:translateY(3.5px) rotate(45deg)}
-.menu-btn[aria-expanded="true"] i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
-@media (min-width:1080px){.menu-btn{display:none}}
+.menu-btn[aria-expanded="true"] i:first-child{translate:0 3.25px;rotate:45deg}
+.menu-btn[aria-expanded="true"] i:last-child{translate:0 -3.25px;rotate:-45deg}
+@media (min-width:1100px){.menu-btn{display:none}}
 
 .drawer{
-  position:fixed;inset:0;z-index:55;
-  background:var(--navy-900);
-  display:flex;flex-direction:column;justify-content:center;gap:1rem;
-  padding:var(--pad);
+  position:fixed;inset:0;z-index:85;background:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;gap:.35rem;
+  padding:var(--pad);overflow:hidden;
 }
 .drawer[hidden]{display:none}
+.drawer__bot{color:var(--marine);opacity:.5;right:-16%;bottom:-10%;width:min(64vw,340px)}
 .drawer a{
-  font-family:var(--serif);font-size:clamp(2rem,10vw,3rem);font-weight:700;
-  text-decoration:none;color:var(--cream);line-height:1.1;
+  position:relative;z-index:1;text-decoration:none;
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(2.1rem,11vw,3.4rem);line-height:1.2;
 }
-.drawer a:active{color:var(--sky)}
+.drawer a:active{color:var(--wash)}
 
 /* =========================================================
-   SHARED TYPE
+   TYPE
    ========================================================= */
 .eyebrow{
-  font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  margin:0 0 1.4rem;opacity:.65;
+  font-size:.66rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  margin:0 0 1.6rem;opacity:.55;
 }
 .display{
-  font-family:var(--serif);font-weight:700;
-  font-size:clamp(2.1rem,6vw,4rem);line-height:1.04;
-  letter-spacing:-.02em;margin:0 0 1.2rem;
+  font-family:var(--display);font-weight:700;font-optical-sizing:auto;
+  font-size:clamp(2rem,5.6vw,3.7rem);line-height:1.06;letter-spacing:-.015em;
+  margin:0 0 1.3rem;text-wrap:balance;
 }
-.lede{font-size:clamp(1rem,2.3vw,1.18rem);max-width:52ch;margin:0;opacity:.85}
-.sec-head{margin-bottom:clamp(3rem,7vw,5rem)}
-.sec-head--center{text-align:center}
-.sec-head--center .lede{margin-inline:auto}
+.lede{max-width:56ch;margin:0;opacity:.72;font-size:clamp(1rem,2.1vw,1.14rem)}
+.sec-head{margin-bottom:clamp(3rem,8vw,5.5rem);max-width:46ch}
 
-/* arch shape used for every photo */
-.arch{
-  border-radius:999px 999px 14px 14px;
-  overflow:hidden;
-  background:var(--navy-700);
+.script{
+  font-family:var(--hand);font-weight:300;
+  font-size:clamp(1.1rem,3.8vw,1.9rem);line-height:1.1;
+  color:var(--iron);margin:.5rem 0 0;
+  rotate:-3deg;transform-origin:left center;
 }
-.arch img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.arch--sm{border-radius:999px 999px 12px 12px}
 
 /* =========================================================
-   HERO
+   PHOTO PLATES
+   Two copies of the same photo stacked. The top one carries
+   the duotone and fades back as it scrolls into view, so the
+   print develops. It never fully clears on its own: a thin
+   blue veil keeps her in the same world as everything else.
+   Hover or focus clears it the rest of the way.
+   ========================================================= */
+/* the padding reserves the room the plate number sits in, so it
+   never collides with whatever block follows on a narrow screen */
+.plate{margin:0;position:relative;width:100%;padding-bottom:2.4rem}
+.plate__arch{
+  position:relative;overflow:hidden;
+  border-radius:999px 999px 8px 8px;
+  background:var(--marine);
+  box-shadow:0 30px 70px color-mix(in oklch,var(--ink) 70%,transparent);
+}
+.plate__img,.plate__blue{width:100%;aspect-ratio:3/4;object-fit:cover}
+.plate__blue{
+  position:absolute;inset:0;filter:url(#cyano);
+  transition:opacity 2.4s var(--expo);
+}
+.plate.is-developed .plate__blue{opacity:.28}
+.plate__arch:hover .plate__blue,
+.plate__arch:focus-within .plate__blue{opacity:0;transition-duration:.9s}
+
+.plate__cap{
+  position:absolute;left:.2rem;bottom:.5rem;
+  font-family:var(--display);font-style:italic;font-size:.95rem;
+  letter-spacing:.08em;opacity:.62;
+}
+
+/* =========================================================
+   PORTADA
    ========================================================= */
 .hero{
-  position:relative;
-  min-height:100svh;
+  position:relative;min-height:100svh;overflow:hidden;
   display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(5rem,12vw,7rem) 0 5rem;
+  padding:clamp(5.5rem,13vw,7rem) 0 4.5rem;
   background:
-    radial-gradient(120% 90% at 85% 0%, rgb(43 95 168 / .35), transparent 60%),
-    var(--navy-900);
+    radial-gradient(115% 80% at 78% 8%, var(--prussian), transparent 62%),
+    var(--ink);
 }
-.hero__grid{display:grid;gap:clamp(2.5rem,6vw,4rem);align-items:center}
+@media (min-width:1100px){.hero{padding-left:var(--rail-w)}}
+
+.hero__fern {color:var(--marine);opacity:.55;left:-13%;top:-6%;width:min(52vw,430px)}
+.hero__grass{color:var(--wash);  opacity:.28;right:-4%;bottom:-3%;width:min(58vw,420px)}
+
+.hero__grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:center}
 .hero__grid>*{min-width:0}
-@media (min-width:900px){
-  .hero__grid{grid-template-columns:1.15fr .85fr}
-  .hero{padding-left:var(--rail-w)}
-}
-@media (min-width:1080px){.hero .wrap{max-width:1240px}}
+@media (min-width:920px){.hero__grid{grid-template-columns:1.18fr .82fr}}
 
 .giant{
-  font-family:var(--serif);font-weight:900;
-  margin:0;line-height:.82;letter-spacing:-.035em;
-  font-size:clamp(3.6rem,15vw,8.5rem);
-  position:relative;display:block;
+  font-family:var(--display);font-weight:900;font-optical-sizing:auto;
+  margin:0;line-height:.84;letter-spacing:-.03em;
+  font-size:clamp(3rem,14vw,8.8rem);
 }
-.giant__l1,.giant__l2{display:block}
-.giant__l2{color:var(--sky);padding-left:.09em}
-.giant__script{
-  display:block;
-  font-family:var(--hand);font-weight:700;
-  font-size:clamp(1.6rem,5.5vw,3rem);
-  color:var(--clay);
-  transform:rotate(-4deg);
-  margin-top:-.15em;margin-left:.15em;
-  line-height:1;
-}
-.hero__name{
-  font-family:var(--serif);font-style:italic;font-weight:500;
-  font-size:clamp(1.5rem,4.5vw,2.4rem);
-  margin:1.4rem 0 1.1rem;color:var(--ice);
-}
-.hero__name .dot{color:var(--clay)}
-.hero__sub{max-width:44ch;margin:0 0 1.6rem;opacity:.8;font-size:clamp(.98rem,2.2vw,1.1rem)}
-.hero__date{
-  display:inline-block;margin:0;
-  font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  padding:.55rem .95rem;border:1px solid rgb(168 200 232 / .4);border-radius:99px;
-  color:var(--sky);
+.giant__line{display:block}
+.giant__line--2{color:var(--wash);padding-left:.06em}
+/* every letter is its own span, so the word can expose across */
+.giant .ltr{display:inline-block;will-change:opacity,translate,filter}
+body.is-loading .giant .ltr{opacity:0}
+.giant .ltr.is-lit{animation:expose .95s var(--expo) both}
+@keyframes expose{
+  from{opacity:0;translate:0 .26em;filter:blur(13px)}
+  to  {opacity:1;translate:0 0;    filter:blur(0)}
 }
 
-.hero__photo{margin:0;position:relative;justify-self:center;width:100%;max-width:min(360px,78vw)}
-.hero__photo .arch{box-shadow:0 30px 70px rgb(0 0 0 / .5)}
-.hero__photo .ring{
-  position:absolute;left:-14%;bottom:-8%;
-  width:52%;aspect-ratio:1;border-radius:50%;
-  border:1.5px solid var(--corn);opacity:.6;
+.hero__name{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(1.5rem,4.4vw,2.3rem);
+  margin:1.5rem 0 1.1rem;color:var(--pale);
 }
+.hero__sub{max-width:42ch;margin:0 0 1.8rem;opacity:.7}
+.hero__date{
+  display:inline-block;margin:0;color:var(--pale);
+  font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  padding:.6rem 1.05rem;border-radius:99px;
+  border:1px solid color-mix(in oklch,var(--wash) 45%,transparent);
+}
+
+.hero__plate{justify-self:center;max-width:min(370px,76vw)}
+.plate__sprig{color:var(--frost);opacity:.62;left:-24%;bottom:-4%;width:42%;z-index:2}
 
 .cue{
-  align-self:center;margin-top:clamp(2.5rem,6vw,4rem);
-  font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  text-decoration:none;opacity:.55;display:flex;align-items:center;gap:.6rem;
+  position:relative;z-index:1;align-self:center;
+  margin-top:clamp(2.5rem,6vw,4rem);
+  display:flex;align-items:center;gap:.7rem;text-decoration:none;opacity:.68;
+  font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
 }
-.cue i{width:1px;height:34px;background:currentColor;display:block;animation:drop 2.4s ease-in-out infinite}
-@keyframes drop{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+.cue i{width:1px;height:36px;background:currentColor;animation:drip 2.6s ease-in-out infinite}
+@keyframes drip{0%,100%{scale:1 .3;transform-origin:top}50%{scale:1 1;transform-origin:top}}
 
 /* =========================================================
-   ABOUT  (cream section)
+   COSAS CIERTAS  —  laid out like a herbarium sheet
    ========================================================= */
-.about{
-  background:var(--cream);color:var(--navy-900);
-  padding:var(--sec-y) 0;position:relative;
+.about{position:relative;overflow:hidden;background:var(--prussian);padding:var(--sec-y) 0}
+@media (min-width:1100px){.about{padding-left:var(--rail-w)}}
+.about__seed{color:var(--pale);opacity:.2;right:-8%;top:4%;width:min(46vw,320px)}
+
+.sheet{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,5rem);align-items:start}
+.sheet>*{min-width:0}
+@media (min-width:880px){.sheet{grid-template-columns:1.3fr .7fr}}
+
+.things{list-style:none;counter-reset:t;margin:0;padding:0}
+.things li{
+  counter-increment:t;position:relative;padding:1.8rem 0 1.9rem;
+  border-top:1px solid color-mix(in oklch,var(--pale) 22%,transparent);
 }
-@media (min-width:1080px){.about{padding-left:var(--rail-w)}}
-.about .eyebrow{opacity:.5}
-.about .lede{opacity:.75}
-
-.about__body{display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:start}
-.about__body>*{min-width:0}
-@media (min-width:860px){.about__body{grid-template-columns:1.25fr .75fr}}
-
-.things{list-style:none;counter-reset:t;margin:0;padding:0;display:grid;gap:2.2rem}
-.things li{counter-increment:t;padding-left:3.4rem;position:relative}
+.things li:last-child{border-bottom:1px solid color-mix(in oklch,var(--pale) 22%,transparent)}
+@media (min-width:600px){.things li:nth-child(even){padding-left:clamp(1.5rem,5vw,3.5rem)}}
 .things li::before{
-  content:counter(t,decimal-leading-zero);
-  position:absolute;left:0;top:.1rem;
-  font-family:var(--serif);font-weight:700;font-size:1.35rem;
-  color:var(--azure);
+  content:counter(t,decimal-leading-zero);display:block;margin-bottom:.7rem;
+  font-size:.64rem;font-weight:600;letter-spacing:.2em;color:var(--wash);
 }
 .things h3{
-  font-family:var(--serif);font-weight:700;font-size:clamp(1.15rem,2.8vw,1.5rem);
-  margin:0 0 .45rem;line-height:1.2;
+  font-family:var(--display);font-weight:700;font-optical-sizing:auto;
+  font-size:clamp(1.3rem,3.4vw,1.85rem);line-height:1.14;
+  margin:0 0 .55rem;text-wrap:balance;
 }
-.things p{margin:0;opacity:.72;font-size:.98rem;max-width:46ch}
+.things p{margin:0;opacity:.66;max-width:50ch;font-size:.98rem}
 
-.about__photo{margin:0;position:sticky;top:3rem}
-.about__photo .arch{box-shadow:0 24px 55px rgb(19 25 54 / .22)}
+.about__plate{position:sticky;top:4rem;max-width:min(340px,72vw);justify-self:center}
 
-.pull{
-  margin:clamp(3.5rem,9vw,6rem) 0 0;padding:0;
-  text-align:center;
-}
+.pull{position:relative;z-index:1;margin:clamp(4rem,10vw,7rem) 0 0;padding:0}
+.pull::before{content:"";display:block;width:52px;height:1px;background:var(--iron);margin:0 auto 2.4rem}
 .pull p{
-  font-family:var(--serif);font-style:italic;font-weight:500;
-  font-size:clamp(1.4rem,4.2vw,2.4rem);line-height:1.3;
-  margin:0 auto;max-width:22ch;color:var(--cobalt);
-}
-.pull::before{
-  content:"";display:block;width:44px;height:1px;
-  background:var(--clay);margin:0 auto 2rem;
+  font-family:var(--display);font-style:italic;font-weight:500;font-optical-sizing:auto;
+  font-size:clamp(1.4rem,4.4vw,2.6rem);line-height:1.28;
+  margin:0 auto;max-width:20ch;text-align:center;color:var(--frost);text-wrap:balance;
 }
 
 /* =========================================================
-   VOICES  (azure section)
+   LAS VOCES
+   Cards as pressed-specimen labels. Each carries its own
+   plant as a watermark, so no two read the same.
    ========================================================= */
-.voices{
-  background:var(--cobalt);color:var(--cream);
-  padding:var(--sec-y) 0;
-}
-@media (min-width:1080px){.voices{padding-left:var(--rail-w)}}
-.voices .eyebrow{opacity:.7}
+.voices{position:relative;overflow:hidden;background:var(--ink);padding:var(--sec-y) 0}
+@media (min-width:1100px){.voices{padding-left:var(--rail-w)}}
+.voices__frond{color:var(--marine);opacity:.5;left:-9%;bottom:-6%;width:min(50vw,360px)}
 
 .cards{
-  list-style:none;margin:0;padding:0;
-  display:grid;gap:1.1rem;
-  grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));
+  position:relative;z-index:1;list-style:none;margin:0;padding:0;
+  display:grid;gap:1.2rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));
 }
 .card{
-  position:relative;display:flex;flex-direction:column;gap:.8rem;
-  width:100%;text-align:left;cursor:pointer;
-  padding:1.6rem 1.5rem 1.4rem;
-  border:0;border-radius:18px 18px 6px 6px;
-  background:var(--cream);color:var(--navy-900);
-  transition:transform .3s cubic-bezier(.2,.8,.3,1),box-shadow .3s;
-  box-shadow:0 10px 26px rgb(6 12 32 / .22);
-  font-family:inherit;
+  position:relative;overflow:hidden;isolation:isolate;
+  display:flex;flex-direction:column;gap:.75rem;
+  width:100%;height:100%;text-align:left;cursor:pointer;
+  padding:1.7rem 1.5rem 1.35rem;border:0;border-radius:14px 14px 4px 4px;
+  background:var(--pale);color:var(--ink);font-family:inherit;
+  box-shadow:0 12px 30px color-mix(in oklch,var(--ink) 55%,transparent);
+  transition:translate .5s var(--expo),box-shadow .5s var(--expo);
 }
-.card:hover,.card:focus-visible{transform:translateY(-6px);box-shadow:0 20px 44px rgb(6 12 32 / .34)}
-.card--sky{background:var(--sky)}
-.card--cornflower{background:var(--corn);color:#0B1026}
-.card--azure{background:var(--azure);color:var(--cream)}
-.card--cream{background:var(--cream)}
+.card--sky       {background:var(--pale)}
+.card--cream     {background:var(--frost)}
+/* --wash sits at L .615, a mid-tone: dark text on it starts at ~7:1
+   and any opacity on a label drops it under AA. Lifted so the small
+   caps have room to breathe, still distinct from --pale and --frost. */
+.card--cornflower{background:oklch(0.758 0.058 234)}
+.card--azure     {background:var(--marine);color:var(--frost)}
 
-.card__role{
-  font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  opacity:.6;margin:0;
+.card__bot{
+  position:absolute;right:-14%;bottom:-12%;width:62%;z-index:-1;
+  opacity:.13;transform-origin:80% 100%;
+  transition:scale .7s var(--expo),opacity .7s var(--expo);
 }
+.card:hover,.card:focus-visible{
+  translate:0 -6px;
+  box-shadow:0 24px 48px color-mix(in oklch,var(--ink) 68%,transparent);
+}
+.card:hover .card__bot{scale:1.09;opacity:.2}
+
+.card__num{margin:0;font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.9}
+.card__role{margin:0;font-size:.63rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.94}
 .card__name{
-  font-family:var(--serif);font-weight:700;font-size:1.5rem;line-height:1.1;margin:0;
+  font-family:var(--display);font-weight:700;font-optical-sizing:auto;
+  font-size:1.6rem;line-height:1.08;margin:0;
 }
 .card__phrase{
-  font-family:var(--serif);font-style:italic;font-size:1rem;line-height:1.45;
-  margin:0;opacity:.8;
+  font-family:var(--display);font-style:italic;font-size:1.02rem;line-height:1.42;
+  margin:0;opacity:.92;
 }
 .card__foot{
-  margin-top:auto;padding-top:.9rem;
-  display:flex;align-items:center;gap:.5rem;
-  font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  margin-top:auto;padding-top:1rem;display:flex;align-items:center;gap:.55rem;
+  font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  border-top:1px solid color-mix(in oklch,currentColor 22%,transparent);
 }
 .card__play{
-  width:26px;height:26px;border-radius:50%;
-  border:1.5px solid currentColor;
-  display:grid;place-items:center;flex:none;
+  width:24px;height:24px;border-radius:50%;flex:none;
+  border:1px solid currentColor;display:grid;place-items:center;
 }
-.card__play::before{
-  content:"";border-left:7px solid currentColor;
-  border-block:4.5px solid transparent;margin-left:2px;
-}
-.card.is-locked{opacity:.62;cursor:default}
-.card.is-locked:hover{transform:none;box-shadow:0 10px 26px rgb(6 12 32 / .22)}
+.card__play::before{content:"";border-left:6px solid currentColor;border-block:4px solid transparent;margin-left:2px}
+.card.is-locked{cursor:default;opacity:.88}
+.card.is-locked:hover{translate:0 0;box-shadow:0 12px 30px color-mix(in oklch,var(--ink) 55%,transparent)}
 .card.is-locked .card__play{border-style:dashed}
-.card.is-locked .card__play::before{
-  border:0;width:7px;height:7px;border-radius:50%;
-  background:currentColor;margin:0;
-}
+.card.is-locked .card__play::before{border:0;width:6px;height:6px;border-radius:50%;background:currentColor;margin:0}
 
 /* =========================================================
-   LETTER
+   LA CARTA
+   The one section that is not blue. After three screens of
+   Prussian, warm paper reads as an actual letter.
    ========================================================= */
 .letter{
-  background:var(--navy-900);padding:var(--sec-y) 0 0;
+  position:relative;overflow:hidden;
+  background:var(--paper);color:var(--ink);padding:var(--sec-y) 0 0;
 }
-@media (min-width:1080px){.letter{padding-left:var(--rail-w)}}
-.letter__grid{display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:center}
-.letter__grid>*{min-width:0}
-@media (min-width:860px){.letter__grid{grid-template-columns:.8fr 1.2fr}}
-.letter__photo{margin:0;width:100%;max-width:min(320px,72vw);justify-self:center}
-.letter__photo .arch{box-shadow:0 26px 60px rgb(0 0 0 / .5)}
+@media (min-width:1100px){.letter{padding-left:var(--rail-w)}}
+.letter__algae{color:var(--prussian);opacity:.16;right:-6%;top:6%;width:min(44vw,300px)}
 
-.prose p{margin:0 0 1.1rem;opacity:.82;max-width:56ch;font-size:clamp(1rem,2.2vw,1.08rem)}
-.sign{margin:2rem 0 0;display:flex;flex-direction:column;gap:.1rem}
-.sign__off{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
-.sign__name{font-family:var(--hand);font-size:2.4rem;color:var(--sky);line-height:1.1}
+.letter__grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,5rem);align-items:center}
+.letter__grid>*{min-width:0}
+@media (min-width:880px){.letter__grid{grid-template-columns:.75fr 1.25fr}}
+.letter__plate{max-width:min(320px,72vw);justify-self:center}
+.letter .plate__arch{box-shadow:0 26px 60px color-mix(in oklch,var(--prussian) 30%,transparent)}
+.letter .plate__cap{opacity:.45}
+.letter .eyebrow{opacity:.5}
+
+.prose p{margin:0 0 1.2rem;max-width:62ch;opacity:.78}
+.sign{margin:2.4rem 0 0;display:flex;flex-direction:column;gap:.25rem}
+.sign__off{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.68}
+.sign__name{
+  font-family:var(--hand);font-weight:400;
+  font-size:clamp(1.5rem,4.6vw,2.1rem);line-height:1.4;
+  color:var(--prussian);rotate:-2deg;transform-origin:left center;
+}
 
 .foot{
-  margin-top:clamp(4rem,10vw,7rem);padding:1.6rem var(--pad);
-  border-top:1px solid rgb(243 236 225 / .12);
-  text-align:center;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;opacity:.4;
+  margin-top:clamp(4rem,10vw,7rem);padding:1.7rem var(--pad);
+  border-top:1px solid color-mix(in oklch,var(--ink) 14%,transparent);
+  text-align:center;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;opacity:.62;
 }
 
 /* =========================================================
-   PLAYER  (what an NFC tap opens)
+   EL REPRODUCTOR
+   What an NFC tap opens. Everything else defers to this.
    ========================================================= */
 .player{
-  position:fixed;inset:0;z-index:80;
-  background:var(--navy-900);
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  position:fixed;inset:0;z-index:100;overflow:hidden auto;
+  background:var(--ink);-webkit-overflow-scrolling:touch;
   padding:calc(env(safe-area-inset-top) + 1.25rem) var(--pad)
           calc(env(safe-area-inset-bottom) + 2.5rem);
-  animation:fade .35s ease;
+  animation:develop .5s var(--expo);
 }
 .player[hidden]{display:none}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes develop{from{opacity:0;scale:1.012}to{opacity:1;scale:1}}
+.player__bot{color:var(--marine);opacity:.4;right:-16%;top:-8%;width:min(52vw,360px)}
 
-.player__inner{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;min-height:100%}
-
+.player__inner{
+  position:relative;z-index:1;max-width:740px;margin-inline:auto;
+  display:flex;flex-direction:column;min-height:100%;
+}
 .player__close{
   align-self:flex-start;margin-bottom:clamp(1.8rem,6vw,3rem);
-  display:flex;align-items:center;gap:.55rem;
-  background:none;border:0;padding:.5rem .1rem;cursor:pointer;
-  font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  opacity:.6;
+  display:flex;align-items:center;gap:.6rem;
+  background:none;border:0;padding:.5rem .1rem;cursor:pointer;opacity:.55;
+  font-size:.64rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  transition:opacity .3s var(--expo);
 }
 .player__close:hover{opacity:1}
 
 .player__role{
-  margin:0 0 .5rem;color:var(--sky);
-  font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  margin:0 0 .6rem;color:var(--wash);
+  font-size:.63rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
 }
 .player__name{
-  font-family:var(--serif);font-weight:900;letter-spacing:-.02em;
-  font-size:clamp(2.4rem,11vw,4.5rem);line-height:.95;margin:0 0 clamp(1.5rem,5vw,2.5rem);
+  font-family:var(--display);font-weight:900;font-optical-sizing:auto;
+  font-size:clamp(2.3rem,10.5vw,4.2rem);line-height:.96;letter-spacing:-.02em;
+  margin:0 0 clamp(1.5rem,5vw,2.4rem);
 }
-
 .player__stage{
-  border-radius:16px;overflow:hidden;background:#000;
-  box-shadow:0 24px 60px rgb(0 0 0 / .6);
+  border-radius:12px;overflow:hidden;background:#000;
+  box-shadow:0 26px 64px color-mix(in oklch,var(--ink) 80%,transparent);
 }
 .player__stage video{
   width:100%;height:auto;display:block;
-  max-height:58svh;object-fit:contain;background:#000;
+  max-height:56svh;object-fit:contain;background:#000;
 }
 .player__missing{
   padding:clamp(2.5rem,10vw,4rem) 1.5rem;text-align:center;
-  background:var(--navy-700);color:var(--sky);
-  font-family:var(--serif);font-style:italic;font-size:1.15rem;
+  background:var(--prussian);color:var(--pale);
+  font-family:var(--display);font-style:italic;font-size:1.15rem;
 }
-
-.player__quote{margin:clamp(1.8rem,6vw,2.8rem) 0 0;padding:0}
+.player__quote{margin:clamp(1.8rem,6vw,2.6rem) 0 0;padding:0}
 .player__quote p{
-  font-family:var(--serif);font-style:italic;font-weight:500;
-  font-size:clamp(1.35rem,5.5vw,2.1rem);line-height:1.32;margin:0;
-  color:var(--cream);
+  font-family:var(--display);font-style:italic;font-weight:500;font-optical-sizing:auto;
+  font-size:clamp(1.3rem,5.2vw,2rem);line-height:1.34;margin:0;text-wrap:pretty;
 }
-.player__quote p::before{content:"“"}
-.player__quote p::after{content:"”"}
+.player__quote p::before{content:"«\2009"}
+.player__quote p::after{content:"\2009»"}
 
-.player__pager{
-  margin-top:auto;padding-top:clamp(2.5rem,8vw,4rem);
-  display:flex;justify-content:space-between;gap:1rem;
-}
+.player__pager{margin-top:auto;padding-top:clamp(2.5rem,8vw,4rem);display:flex;justify-content:space-between;gap:1rem}
 .ghost{
-  background:none;border:1px solid rgb(168 200 232 / .35);border-radius:99px;
-  padding:.7rem 1.2rem;cursor:pointer;
-  font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--sky);transition:background .25s,border-color .25s;
+  background:none;cursor:pointer;color:var(--pale);border-radius:99px;
+  border:1px solid color-mix(in oklch,var(--wash) 42%,transparent);
+  padding:.72rem 1.25rem;
+  font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  transition:background .35s var(--expo),border-color .35s var(--expo);
 }
-.ghost:hover:not(:disabled){background:rgb(168 200 232 / .12);border-color:var(--sky)}
-.ghost:disabled{opacity:.25;cursor:default}
+.ghost:hover:not(:disabled){background:color-mix(in oklch,var(--wash) 14%,transparent);border-color:var(--wash)}
+.ghost:disabled{opacity:.22;cursor:default}
 
 /* =========================================================
-   REVEAL ON SCROLL
+   REVEAL
    ========================================================= */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.3,1)}
-.reveal.is-in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .cue i{animation:none}
-  .player{animation:none}
-}
+.reveal{opacity:0;translate:0 30px;transition:opacity .9s var(--expo),translate .9s var(--expo)}
+.reveal.is-in{opacity:1;translate:0 0}
 
-:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:2px solid var(--iron);outline-offset:3px;border-radius:3px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;translate:0 0;transition:none}
+  .bot{animation:none !important;translate:none !important}
+  .giant .ltr,body.is-loading .giant .ltr{opacity:1;animation:none}
+  .plate__blue{transition:none}
+  .cue i,.player{animation:none}
+  .card,.rail a{transition:none}
+}

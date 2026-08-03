@@ -1,143 +1,165 @@
 /* ============================================================
-   CONTENT.JS  —  This is the ONLY file you need to edit.
-   Everything the website says lives here.
-   Save the file, refresh the page, and it updates.
+   CONTENT.JS  —  El único archivo que tienes que editar.
+   Todo lo que dice el sitio vive aquí.
+   Guardas, refrescas la página, y ya.
    ============================================================ */
 
 const CONTENT = {
 
-  /* ---- THE BASICS -------------------------------------- */
-  // TODO Jonathan: replace with her real name / nickname.
+  /* ---- LO BÁSICO --------------------------------------- */
+  // TODO Jonathan: pon su nombre real / como le dices.
   name: "Mon",
-  age: 25,
-  birthdayLabel: "August 8th",        // shown small in the hero
-  tabTitle: "Happy 25th, Mon",        // browser tab text
+  birthdayLabel: "8 de agosto",
+  tabTitle: "Feliz 25, Mon",
 
-  /* ---- 1. HERO ----------------------------------------- */
+  /* ---- 1. PORTADA -------------------------------------- */
   hero: {
-    eyebrow: "01 — Twenty five trips around the sun",
-    script: "happy birthday",          // handwritten line over the big type
-    big1: "TWENTY",
-    big2: "FIVE",
+    eyebrow: "01 · Veinticinco vueltas al sol",
+    script: "feliz cumpleaños",     // la línea escrita a mano
+    big1: "VEINTI",
+    big2: "CINCO",
     subtitle:
-      "A little corner of the internet built only for you — " +
-      "with the voices of the people who love you living inside it.",
-    scrollCue: "keep going",
+      "Un rincón del internet hecho nada más para ti, con las voces de la " +
+      "gente que te quiere viviendo adentro.",
+    scrollCue: "sigue",
   },
 
-  /* ---- 2. ABOUT HER ------------------------------------ */
-  // TODO Jonathan: rewrite all of these in your own words.
-  // Add or remove entries freely — the layout adapts.
+  /* ---- 2. SOBRE ELLA ----------------------------------- */
+  // TODO Jonathan: reescribe esto con tus palabras.
+  // Puedes agregar o quitar cosas, el diseño se acomoda solo.
   about: {
-    eyebrow: "02 — Some true things",
-    title: "Twenty-five years of you",
+    eyebrow: "02 · Cosas ciertas",
+    title: "Veinticinco años de ti",
     intro:
-      "I could have written one long letter. Instead I wrote down the things " +
-      "I never want you to forget about yourself.",
+      "Pude haber escrito una sola carta larga. En vez de eso anoté las cosas " +
+      "que no quiero que se te olviden de ti misma.",
     things: [
       {
-        title: "You laugh with your whole face",
+        title: "Te ríes con toda la cara",
         body:
-          "Not politely. Not quietly. Your whole face joins in, and it makes " +
-          "everyone in the room decide the day is going to be good.",
+          "No de forma educada, ni bajito. Se te ríe la cara entera, y todos " +
+          "en el cuarto deciden que el día va a estar bueno.",
       },
       {
-        title: "You make people feel chosen",
+        title: "Haces que la gente se sienta elegida",
         body:
-          "You remember the small thing someone mentioned once, months ago, and " +
-          "you bring it back up like it mattered. Because to you, it did.",
+          "Te acuerdas del detalle que alguien mencionó una vez, hace meses, y " +
+          "lo traes de vuelta como si importara. Porque para ti sí importaba.",
       },
       {
-        title: "You are braver than you give yourself credit for",
+        title: "Eres más valiente de lo que te reconoces",
         body:
-          "You keep doing the hard thing quietly, without needing anyone to " +
-          "clap for it. I clap for it. Constantly.",
+          "Sigues haciendo lo difícil en silencio, sin necesitar que nadie te " +
+          "aplauda. Yo te aplaudo. Todo el tiempo.",
       },
       {
-        title: "Blue looks like you",
+        title: "El azul se te parece",
         body:
-          "Every shade of it. Sky, cornflower, cobalt, midnight. This whole " +
-          "site is made of your favourite colour on purpose.",
+          "En todos sus tonos: cielo, aciano, cobalto, medianoche. Todo este " +
+          "sitio está hecho de tu color favorito a propósito.",
       },
     ],
-    quote: "Being loved by you is the easiest thing I have ever done.",
+    quote: "Quererte ha sido la cosa más fácil que he hecho en la vida.",
   },
 
-  /* ---- 3. THE VOICES SECTION --------------------------- */
+  /* ---- 3. LAS VOCES ------------------------------------ */
   voices: {
-    eyebrow: "03 — The voices",
-    title: "People who wanted to tell you something",
+    eyebrow: "03 · Las voces",
+    title: "Gente que quería decirte algo",
     intro:
-      "Each little tag in your box opens one of these. Tap a card here, or tap " +
-      "a tag on your phone, and that person shows up to say it out loud.",
-    lockedLabel: "Video coming soon",
+      "Cada plaquita de tu caja abre una de estas. Toca una tarjeta aquí, o " +
+      "acércale la plaquita al teléfono, y esa persona aparece a decírtelo en " +
+      "voz alta.",
+    lockedLabel: "Video en camino",
+    playLabel: "Reproducir",
+    specimenLabel: "espécimen",
   },
 
-  /* ---- 4. FRIENDS + THEIR VIDEOS ----------------------- */
+  /* ---- 4. LA GENTE + SUS VIDEOS ------------------------ */
   /*
-     HOW TO ADD SOMEONE
-     ------------------
-     1. Run:  ./tools/add-video.sh ~/Desktop/whatever.mov maria
-        (that compresses the clip into media/videos/maria.mp4
-         and grabs a poster frame automatically)
-     2. Add an entry below.
-     3. Write the NFC tag with the url shown in the README:
-           https://<your-site>/#/from/maria
+     CÓMO AGREGAR A ALGUIEN
+     ----------------------
+     1. Corre:  ./tools/add-video.sh ~/Desktop/loquesea.mov maria
+        (comprime el clip a media/videos/maria.mp4 y saca el poster solo)
+     2. Agrega una entrada abajo.
+     3. Graba la NFC con la url que sale en el README:
+           https://jonnyh1801.github.io/twenty-five/#/from/maria
 
-     FIELDS
-       slug   — lowercase, no spaces. This is what goes on the NFC tag.
-       name   — how she knows them
-       role   — "Best friend since 2014", "Her mom", "Roommate", ...
-       phrase — THE line from their video. Keep it short and punchy.
-       video  — filename inside media/videos/ , or null if not filmed yet
-       accent — "sky" | "azure" | "cornflower" | "cream"  (card colour)
+     CAMPOS
+       slug   — minúsculas, sin espacios. Esto es lo que va en la NFC.
+       name   — como ella les dice
+       role   — "Mejor amiga desde 2014", "Su mamá", "Su roomie", ...
+       phrase — LA frase de su video. Corta y que pegue.
+       video  — nombre del archivo en media/videos/ , o null si no está grabado
+       accent — "sky" | "azure" | "cornflower" | "cream"  (color de la tarjeta)
+       plant  — "fern" | "eucalyptus" | "seedhead" | "grass" | "algae" | "frond"
+                (el dibujo de la tarjeta; si lo dejas vacío se asigna solo)
   */
-  // TODO Jonathan: these three are EXAMPLES. Delete them and add the real people.
+  // TODO Jonathan: estos tres son EJEMPLOS. Bórralos y pon a la gente real.
   friends: [
     {
       slug: "example-one",
       name: "Sofía",
-      role: "Best friend since forever",
-      phrase: "You are the only person who has never once made me feel like too much.",
+      role: "Mejor amiga de toda la vida",
+      phrase: "Eres la única persona que nunca me ha hecho sentir que soy demasiado.",
       video: null,
       accent: "sky",
+      plant: "fern",
     },
     {
       slug: "example-two",
       name: "Mamá",
-      role: "Her mom",
-      phrase: "I watched you become exactly the woman I hoped you'd be.",
+      role: "Su mamá",
+      phrase: "Te vi convertirte exactamente en la mujer que esperaba que fueras.",
       video: null,
       accent: "cornflower",
+      plant: "eucalyptus",
     },
     {
       slug: "example-three",
       name: "Andrés",
-      role: "Roommate, 2019–2022",
-      phrase: "Nobody throws a Tuesday like you throw a Tuesday.",
+      role: "Roomie, 2019 a 2022",
+      phrase: "Nadie hace de un martes lo que tú haces de un martes.",
       video: null,
       accent: "cream",
+      plant: "seedhead",
     },
   ],
 
-  /* ---- 5. YOUR LETTER ---------------------------------- */
-  // TODO Jonathan: this one is yours. Write it properly.
+  /* ---- 5. TU CARTA ------------------------------------- */
+  // TODO Jonathan: esta es tuya. Escríbela bien.
   letter: {
-    eyebrow: "04 — From me",
-    title: "One more thing",
+    eyebrow: "04 · De mí",
+    title: "Una cosa más",
     body: [
-      "I wanted to give you something you couldn't lose in a drawer.",
-      "So I asked the people who love you to say the thing out loud — the thing " +
-        "they'd say if they weren't worried about being too sentimental. Then I " +
-        "put all of it somewhere you can reach any night you need it.",
-      "Tap a tag. Any tag. Whenever you want. They'll still be here at thirty, " +
-        "and at fifty, and whenever you forget how much room you take up in " +
-        "people's lives.",
-      "Happy twenty-fifth, my love.",
+      "Quería darte algo que no se te pudiera perder en un cajón.",
+      "Así que le pedí a la gente que te quiere que lo dijera en voz alta, eso " +
+        "que dirían si no les diera pena ponerse sentimentales. Y luego lo " +
+        "guardé todo en un lugar al que puedas llegar cualquier noche que lo " +
+        "necesites.",
+      "Acerca una plaquita. La que sea. Cuando quieras. Van a seguir aquí a los " +
+        "treinta, y a los cincuenta, y cada vez que se te olvide cuánto espacio " +
+        "ocupas en la vida de la gente.",
+      "Feliz veinticinco, mi amor.",
     ],
-    signoff: "always,",
+    signoff: "siempre,",
     from: "Jonathan",
   },
 
-  footer: "made by hand · 2026",
+  /* ---- 6. TEXTITOS DE LA INTERFAZ ---------------------- */
+  ui: {
+    navHome: "Inicio",
+    navAbout: "Sobre ti",
+    navVoices: "Las voces",
+    navLetter: "De mí",
+    menu: "Menú",
+    close: "Cerrar",
+    back: "Todas las voces",
+    prev: "Anterior",
+    next: "Siguiente",
+    notFilmed: "Este todavía no se ha grabado.",
+    photoAlt: "Foto suya",
+  },
+
+  footer: "hecho a mano · 2026",
 };

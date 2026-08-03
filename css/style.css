@@ -178,11 +178,12 @@ main{position:relative;z-index:1}
 
 /* =========================================================
    PHOTO PLATES
-   Two copies of the same photo stacked. The top one carries
-   the duotone and fades back as it scrolls into view, so the
-   print develops. It never fully clears on its own: a thin
-   blue veil keeps her in the same world as everything else.
-   Hover or focus clears it the rest of the way.
+   She stays in full colour. The photos are the one warm human
+   thing on the page and tinting them was fighting that.
+
+   The arch is a fixed frame and the photo moves inside it:
+   a slow push in on hover, so the picture leans toward you
+   rather than changing colour.
    ========================================================= */
 /* the padding reserves the room the plate number sits in, so it
    never collides with whatever block follows on a narrow screen */
@@ -192,15 +193,19 @@ main{position:relative;z-index:1}
   border-radius:999px 999px 8px 8px;
   background:var(--marine);
   box-shadow:0 30px 70px color-mix(in oklch,var(--ink) 70%,transparent);
+  transition:box-shadow .8s var(--expo),translate .8s var(--expo);
 }
-.plate__img,.plate__blue{width:100%;aspect-ratio:3/4;object-fit:cover}
-.plate__blue{
-  position:absolute;inset:0;filter:url(#cyano);
-  transition:opacity 2.4s var(--expo);
+.plate__img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;
+  transition:scale 1.1s var(--expo);
+  will-change:scale;
 }
-.plate.is-developed .plate__blue{opacity:.28}
-.plate__arch:hover .plate__blue,
-.plate__arch:focus-within .plate__blue{opacity:0;transition-duration:.9s}
+.plate__arch:hover,.plate__arch:focus-within{
+  translate:0 -8px;
+  box-shadow:0 42px 90px color-mix(in oklch,var(--ink) 78%,transparent);
+}
+.plate__arch:hover .plate__img,
+.plate__arch:focus-within .plate__img{scale:1.06}
 
 .plate__cap{
   position:absolute;left:.2rem;bottom:.5rem;
@@ -492,7 +497,7 @@ body.is-loading .giant .ltr{opacity:0}
   .reveal{opacity:1;translate:0 0;transition:none}
   .bot{animation:none !important;translate:none !important}
   .giant .ltr,body.is-loading .giant .ltr{opacity:1;animation:none}
-  .plate__blue{transition:none}
+  .plate__img,.plate__arch{transition:none}
   .cue i,.player{animation:none}
   .card,.rail a{transition:none}
 }

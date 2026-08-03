@@ -273,17 +273,6 @@
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.06 });
     $$(".reveal").forEach(function (node) { io.observe(node); });
 
-    // the print develops as it scrolls into view
-    var dev = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var p = e.target;
-        setTimeout(function () { p.classList.add("is-developed"); }, CALM ? 0 : 260);
-        dev.unobserve(p);
-      });
-    }, { threshold: 0.2 });
-    $$(".plate").forEach(function (p) { dev.observe(p); });
-
     var railLinks = $$(".rail a");
     var spy = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -299,7 +288,6 @@
     });
   } else {
     $$(".reveal").forEach(function (node) { node.classList.add("is-in"); });
-    $$(".plate").forEach(function (p) { p.classList.add("is-developed"); });
   }
 
   /* =========================================================

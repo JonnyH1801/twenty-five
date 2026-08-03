@@ -55,10 +55,11 @@ Bodoni hairlines vanish at display sizes, so the hero runs at weight 900.
 - **Expose.** Hero letters are individual spans that come up from blur, 52ms
   apart. Held until `document.fonts.ready` so they do not expose in a fallback
   serif and then snap width.
-- **Develop.** Each photo is two stacked copies. The top one carries an SVG
-  duotone (`#cyano`) and fades to `opacity:.28` on scroll-in. It never fully
-  clears on its own, so she stays inside the blue world. Hover or focus clears
-  the rest.
+- **Photos stay in full colour.** An earlier build tinted them with a cyanotype
+  duotone to pull them into the palette. It fought the one warm human thing on
+  the page, so it is gone. The arch is a fixed frame and the photo pushes in
+  inside it on hover instead, `scale: 1.06` over 1.1s, with the whole plate
+  lifting 8px. Colour never changes.
 - **Sway and drift.** Specimens use `rotate` keyframes for sway and JS-set
   `translate` for scroll parallax. Separate CSS properties, so they compose
   instead of overwriting each other. Durations are all coprime-ish (13/15/17/19/

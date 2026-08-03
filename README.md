@@ -3,9 +3,9 @@
 A birthday site with NFC tags. She taps a tag on her phone, a friend's video opens
 with the line they said about her.
 
-Everything is in Spanish. The design is a cyanotype: Prussian blue ground, white
-botanical specimens, photos that develop as you scroll. See [DESIGN.md](DESIGN.md)
-for why, and [PRODUCT.md](PRODUCT.md) for who it is for.
+Everything is in Spanish. The design is a cyanotype: Prussian blue ground with white
+hand-drawn shapes on it. See [DESIGN.md](DESIGN.md) for why, and
+[PRODUCT.md](PRODUCT.md) for who it is for.
 
 Plain HTML/CSS/JS. No build step, no framework, no dependencies. Hosted on GitHub Pages.
 
@@ -56,11 +56,11 @@ The script prints the exact block to paste. Fill in the words:
   video: "sofia.mp4",
   poster: "sofia.jpg",
   accent: "sky",       // sky | azure | cornflower | cream
-  plant: "fern",       // fern | eucalyptus | seedhead | grass | algae | frond
+  shape: "arch",       // arch | grain | pebbles | dome | rings | stipple
 },
 ```
 
-`plant` is the botanical watermark on the card. Leave it out and one gets assigned.
+`shape` is the drawing watermarked on the card. Leave it out and one gets assigned.
 
 Leave `video: null` for anyone who hasn't filmed yet. Their card shows up dimmed with
 "Video en camino" instead of breaking.
@@ -137,15 +137,14 @@ sips -Z 1600 -s format jpeg -s formatOptions 78 ~/Desktop/new.jpg --out media/ph
 Both are documented in [DESIGN.md](DESIGN.md). Colours live in the `:root` block at
 the top of `css/style.css`.
 
-The six botanical silhouettes are drawn in code, not downloaded. To change or
-re-roll them:
+The six abstract shapes are drawn in code, not downloaded. To change or re-roll them:
 
 ```bash
-node tools/draw-botanicals.mjs
+node tools/draw-shapes.mjs
 ```
 
-Edit the seed numbers at the bottom of that file to get different plants of the same
-species. It is seeded, so the same numbers always give the same drawing.
+Edit the seed numbers at the bottom of that file to get a different version of the
+same shape. It is seeded, so the same numbers always give the same drawing.
 
 ---
 

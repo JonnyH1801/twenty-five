@@ -2,11 +2,11 @@
    Cianotipia
    ---------------------------------------------------------
    Anna Atkins, 1843: lay the specimen on sensitised paper,
-   leave it in the sun, wash it. Everything the plant covered
-   stays pale, everything else turns Prussian blue.
+   leave it in the sun, wash it. Everything the specimen
+   covered stays pale, everything else turns Prussian blue.
 
    That is the whole system here. Blue is not an accent, it
-   is the paper. The plants are the absence of it.
+   is the paper. The shapes are the absence of it.
    ========================================================= */
 
 :root{
@@ -55,7 +55,7 @@ a{color:inherit}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
 
-/* z-index 1 keeps every specimen behind the words. they are
+/* z-index 1 keeps every drawing behind the words. they are
    wallpaper, not content. */
 .wrap{position:relative;z-index:1;width:100%;max-width:1200px;margin-inline:auto;padding-inline:var(--pad)}
 main{position:relative;z-index:1}
@@ -72,9 +72,9 @@ main{position:relative;z-index:1}
 }
 
 /* =========================================================
-   THE SPECIMENS
-   Drawn by tools/draw-botanicals.mjs. Used as masks so one
-   file can be any colour at any size.
+   THE SHAPES
+   Drawn by tools/draw-shapes.mjs. Used as masks so one file
+   can be any colour at any size.
    ========================================================= */
 .bot{
   position:absolute;display:block;pointer-events:none;z-index:0;
@@ -84,24 +84,24 @@ main{position:relative;z-index:1}
   transform-origin:50% 100%;
   will-change:translate;
 }
-.bot--fern      {mask-image:url(../media/botanical/fern.svg);      -webkit-mask-image:url(../media/botanical/fern.svg);      aspect-ratio:460/620}
-.bot--eucalyptus{mask-image:url(../media/botanical/eucalyptus.svg);-webkit-mask-image:url(../media/botanical/eucalyptus.svg);aspect-ratio:260/460}
-.bot--seedhead  {mask-image:url(../media/botanical/seedhead.svg);  -webkit-mask-image:url(../media/botanical/seedhead.svg);  aspect-ratio:260/300}
-.bot--grass     {mask-image:url(../media/botanical/grass.svg);     -webkit-mask-image:url(../media/botanical/grass.svg);     aspect-ratio:380/260}
-.bot--algae     {mask-image:url(../media/botanical/algae.svg);     -webkit-mask-image:url(../media/botanical/algae.svg);     aspect-ratio:300/420}
-.bot--frond     {mask-image:url(../media/botanical/frond.svg);     -webkit-mask-image:url(../media/botanical/frond.svg);     aspect-ratio:340/380}
+.bot--arch   {mask-image:url(../media/shapes/arch.svg);   -webkit-mask-image:url(../media/shapes/arch.svg);   aspect-ratio:400/520}
+.bot--grain  {mask-image:url(../media/shapes/grain.svg);  -webkit-mask-image:url(../media/shapes/grain.svg);  aspect-ratio:460/300}
+.bot--pebbles{mask-image:url(../media/shapes/pebbles.svg);-webkit-mask-image:url(../media/shapes/pebbles.svg);aspect-ratio:1}
+.bot--dome   {mask-image:url(../media/shapes/dome.svg);   -webkit-mask-image:url(../media/shapes/dome.svg);   aspect-ratio:380/260}
+.bot--rings  {mask-image:url(../media/shapes/rings.svg);  -webkit-mask-image:url(../media/shapes/rings.svg);  aspect-ratio:1}
+.bot--stipple{mask-image:url(../media/shapes/stipple.svg);-webkit-mask-image:url(../media/shapes/stipple.svg);aspect-ratio:1}
 
-/* nothing sways in sync, or the page reads as a carousel.
+/* nothing drifts in sync, or the page reads as a carousel.
    sway uses `rotate` and the scroll drift uses `translate`,
    which are separate properties, so they compose cleanly. */
-@keyframes sway  {50%{rotate: 1.5deg}}
-@keyframes sway-b{50%{rotate:-1.9deg}}
-.hero__fern    {animation:sway   19s ease-in-out infinite}
-.hero__grass   {animation:sway-b 13s ease-in-out infinite}
-.about__seed   {animation:sway   23s ease-in-out infinite}
-.voices__frond {animation:sway-b 17s ease-in-out infinite}
-.letter__algae {animation:sway   21s ease-in-out infinite}
-.plate__sprig  {animation:sway-b 15s ease-in-out infinite}
+@keyframes sway  {50%{rotate: 1.2deg}}
+@keyframes sway-b{50%{rotate:-1.5deg}}
+.hero__arch    {animation:sway   19s ease-in-out infinite}
+.hero__grain   {animation:sway-b 13s ease-in-out infinite}
+.about__stip   {animation:sway   23s ease-in-out infinite}
+.voices__dome  {animation:sway-b 17s ease-in-out infinite}
+.letter__peb   {animation:sway   21s ease-in-out infinite}
+.plate__rings  {animation:sway-b 15s ease-in-out infinite}
 
 /* =========================================================
    NAVIGATION
@@ -111,7 +111,7 @@ main{position:relative;z-index:1}
   z-index:60;display:none;flex-direction:column;gap:.75rem;
 }
 .rail a{
-  position:relative;text-decoration:none;color:var(--frost);opacity:.4;
+  position:relative;text-decoration:none;color:var(--frost);opacity:.58;
   font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
   transition:opacity .4s var(--expo),translate .4s var(--expo);
 }
@@ -146,7 +146,7 @@ main{position:relative;z-index:1}
   padding:var(--pad);overflow:hidden;
 }
 .drawer[hidden]{display:none}
-.drawer__bot{color:var(--marine);opacity:.5;right:-16%;bottom:-10%;width:min(64vw,340px)}
+.drawer__bot{color:var(--marine);opacity:.45;right:-14%;bottom:-8%;width:min(58vw,300px)}
 .drawer a{
   position:relative;z-index:1;text-decoration:none;
   font-family:var(--display);font-weight:700;
@@ -226,8 +226,8 @@ main{position:relative;z-index:1}
 }
 @media (min-width:1100px){.hero{padding-left:var(--rail-w)}}
 
-.hero__fern {color:var(--marine);opacity:.55;left:-13%;top:-6%;width:min(52vw,430px)}
-.hero__grass{color:var(--wash);  opacity:.28;right:-4%;bottom:-3%;width:min(58vw,420px)}
+.hero__arch {color:var(--marine);opacity:.6;left:-11%;top:-4%;width:min(46vw,360px)}
+.hero__grain{color:var(--wash); opacity:.3;right:-8%;bottom:2%;width:min(62vw,440px)}
 
 .hero__grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:center}
 .hero__grid>*{min-width:0}
@@ -263,7 +263,7 @@ body.is-loading .giant .ltr{opacity:0}
 }
 
 .hero__plate{justify-self:center;max-width:min(370px,76vw)}
-.plate__sprig{color:var(--frost);opacity:.62;left:-24%;bottom:-4%;width:42%;z-index:2}
+.plate__rings{color:var(--frost);opacity:.5;left:-26%;bottom:-6%;width:52%;z-index:2}
 
 .cue{
   position:relative;z-index:1;align-self:center;
@@ -275,11 +275,11 @@ body.is-loading .giant .ltr{opacity:0}
 @keyframes drip{0%,100%{scale:1 .3;transform-origin:top}50%{scale:1 1;transform-origin:top}}
 
 /* =========================================================
-   COSAS CIERTAS  —  laid out like a herbarium sheet
+   COSAS CIERTAS  —  laid out like a specimen sheet
    ========================================================= */
 .about{position:relative;overflow:hidden;background:var(--prussian);padding:var(--sec-y) 0}
 @media (min-width:1100px){.about{padding-left:var(--rail-w)}}
-.about__seed{color:var(--pale);opacity:.2;right:-8%;top:4%;width:min(46vw,320px)}
+.about__stip{color:var(--pale);opacity:.24;right:-6%;top:5%;width:min(40vw,280px)}
 
 .sheet{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,5rem);align-items:start}
 .sheet>*{min-width:0}
@@ -315,12 +315,12 @@ body.is-loading .giant .ltr{opacity:0}
 
 /* =========================================================
    LAS VOCES
-   Cards as pressed-specimen labels. Each carries its own
-   plant as a watermark, so no two read the same.
+   Cards as specimen labels. Each carries its own shape as a
+   watermark, so no two read the same.
    ========================================================= */
 .voices{position:relative;overflow:hidden;background:var(--ink);padding:var(--sec-y) 0}
 @media (min-width:1100px){.voices{padding-left:var(--rail-w)}}
-.voices__frond{color:var(--marine);opacity:.5;left:-9%;bottom:-6%;width:min(50vw,360px)}
+.voices__dome{color:var(--marine);opacity:.55;left:-10%;bottom:0;width:min(54vw,400px)}
 
 .cards{
   position:relative;z-index:1;list-style:none;margin:0;padding:0;
@@ -344,9 +344,16 @@ body.is-loading .giant .ltr{opacity:0}
 .card--cornflower{background:oklch(0.758 0.058 234)}
 .card--azure     {background:var(--marine);color:var(--frost)}
 
+/* A fixed box with mask-size:contain, not an aspect-ratio, so every
+   shape fits whole regardless of its own proportions. The arch is
+   400x520; left to its own ratio it overflows the card and the top
+   curve crops off, leaving what looks like a set of stripes. */
 .card__bot{
-  position:absolute;right:-14%;bottom:-12%;width:62%;z-index:-1;
-  opacity:.13;transform-origin:80% 100%;
+  position:absolute;right:-6%;bottom:-8%;
+  width:56%;height:76%;aspect-ratio:auto;z-index:-1;
+  mask-size:contain;-webkit-mask-size:contain;
+  mask-position:bottom right;-webkit-mask-position:bottom right;
+  opacity:.14;transform-origin:85% 95%;
   transition:scale .7s var(--expo),opacity .7s var(--expo);
 }
 .card:hover,.card:focus-visible{
@@ -390,15 +397,15 @@ body.is-loading .giant .ltr{opacity:0}
   background:var(--paper);color:var(--ink);padding:var(--sec-y) 0 0;
 }
 @media (min-width:1100px){.letter{padding-left:var(--rail-w)}}
-.letter__algae{color:var(--prussian);opacity:.16;right:-6%;top:6%;width:min(44vw,300px)}
+.letter__peb{color:var(--prussian);opacity:.14;right:-5%;top:7%;width:min(38vw,270px)}
 
 .letter__grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,5rem);align-items:center}
 .letter__grid>*{min-width:0}
 @media (min-width:880px){.letter__grid{grid-template-columns:.75fr 1.25fr}}
 .letter__plate{max-width:min(320px,72vw);justify-self:center}
 .letter .plate__arch{box-shadow:0 26px 60px color-mix(in oklch,var(--prussian) 30%,transparent)}
-.letter .plate__cap{opacity:.45}
-.letter .eyebrow{opacity:.5}
+.letter .plate__cap{opacity:.62}
+.letter .eyebrow{opacity:.66}
 
 .prose p{margin:0 0 1.2rem;max-width:62ch;opacity:.78}
 .sign{margin:2.4rem 0 0;display:flex;flex-direction:column;gap:.25rem}
@@ -428,7 +435,7 @@ body.is-loading .giant .ltr{opacity:0}
 }
 .player[hidden]{display:none}
 @keyframes develop{from{opacity:0;scale:1.012}to{opacity:1;scale:1}}
-.player__bot{color:var(--marine);opacity:.4;right:-16%;top:-8%;width:min(52vw,360px)}
+.player__bot{color:var(--marine);opacity:.38;right:-14%;top:-6%;width:min(48vw,330px)}
 
 .player__inner{
   position:relative;z-index:1;max-width:740px;margin-inline:auto;

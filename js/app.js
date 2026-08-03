@@ -8,7 +8,7 @@
   var C = window.CONTENT || CONTENT;
   var VIDEO_DIR = "media/videos/";
   var POSTER_DIR = "media/posters/";
-  var PLANTS = ["fern", "eucalyptus", "seedhead", "grass", "algae", "frond"];
+  var SHAPES = ["arch", "grain", "pebbles", "dome", "rings", "stipple"];
   var CALM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function $(s, r) { return (r || document).querySelector(s); }
@@ -120,8 +120,8 @@
       btn.type = "button";
       if (!f.video) btn.className += " is-locked";
 
-      var plant = f.plant && PLANTS.indexOf(f.plant) > -1 ? f.plant : PLANTS[i % PLANTS.length];
-      var mark = el("span", "bot bot--" + plant + " card__bot");
+      var shape = f.shape && SHAPES.indexOf(f.shape) > -1 ? f.shape : SHAPES[i % SHAPES.length];
+      var mark = el("span", "bot bot--" + shape + " card__bot");
       mark.setAttribute("aria-hidden", "true");
       btn.appendChild(mark);
 

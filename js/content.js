@@ -92,7 +92,7 @@ const CONTENT = {
        phrase — LA frase de su video. Corta y que pegue.
        video  — nombre del archivo en media/videos/ , o null si no está grabado
        accent — "sky" | "azure" | "cornflower" | "cream"  (color de la tarjeta)
-       plant  — "fern" | "eucalyptus" | "seedhead" | "grass" | "algae" | "frond"
+       shape  — "arch" | "grain" | "pebbles" | "dome" | "rings" | "stipple"
                 (el dibujo de la tarjeta; si lo dejas vacío se asigna solo)
   */
   // TODO Jonathan: estos tres son EJEMPLOS. Bórralos y pon a la gente real.
@@ -104,7 +104,7 @@ const CONTENT = {
       phrase: "Eres la única persona que nunca me ha hecho sentir que soy demasiado.",
       video: null,
       accent: "sky",
-      plant: "fern",
+      shape: "arch",
     },
     {
       slug: "example-two",
@@ -113,7 +113,7 @@ const CONTENT = {
       phrase: "Te vi convertirte exactamente en la mujer que esperaba que fueras.",
       video: null,
       accent: "cornflower",
-      plant: "eucalyptus",
+      shape: "pebbles",
     },
     {
       slug: "example-three",
@@ -122,7 +122,7 @@ const CONTENT = {
       phrase: "Nadie hace de un martes lo que tú haces de un martes.",
       video: null,
       accent: "cream",
-      plant: "seedhead",
+      shape: "rings",
     },
   ],
 

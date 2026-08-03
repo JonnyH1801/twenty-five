@@ -153,4 +153,12 @@ of `css/style.css`.
 
 ## Live URL
 
-<!-- filled in after the first deploy -->
+**https://jonnyh1801.github.io/twenty-five/**
+
+So the NFC tag for someone with slug `sofia` gets written with:
+
+```
+https://jonnyh1801.github.io/twenty-five/#/from/sofia
+```
+
+48 characters — fits on any tag with room to spare.

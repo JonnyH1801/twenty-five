@@ -68,10 +68,24 @@ Leave `video: null` for anyone who hasn't filmed yet. Their card shows up dimmed
 ### 3. Push it
 
 ```bash
-git add -A && git commit -m "add sofia" && git push
+./tools/bump.sh && git add -A && git commit -m "add sofia" && git push
 ```
 
 Live in about a minute.
+
+**Don't skip `bump.sh`.** GitHub Pages serves everything with
+`cache-control: max-age=600`, so `index.html` and `content.js` expire on their
+own clocks. For up to ten minutes you can load a page that looks current but is
+still running the old script: new layout, old words. It looks like your edit
+didn't deploy. `bump.sh` stamps `?v=<timestamp>` onto the asset URLs so they
+always refresh together with the page.
+
+If you ever do see something stale anyway, it's the browser, not the repo. Check
+what the server actually has:
+
+```bash
+curl -s https://jonnyh1801.github.io/twenty-five/js/content.js | grep birthdayLabel
+```
 
 ---
 

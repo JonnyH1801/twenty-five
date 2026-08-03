@@ -64,8 +64,12 @@ cat <<EOF
       video: "$SLUG.mp4",
       poster: "$SLUG.jpg",
       accent: "sky",
+      shape: "arch",
     },
 EOF
 echo ""
 echo "and write this url to their NFC tag:"
-echo "    https://<your-github-pages-url>/#/from/$SLUG"
+echo "    https://jonnyh1801.github.io/twenty-five/#/from/$SLUG"
+echo ""
+echo "when you have filled in the words above, run:"
+echo "    ./tools/bump.sh && git add -A && git commit -m \"add $SLUG\" && git push"

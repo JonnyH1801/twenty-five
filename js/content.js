@@ -9,7 +9,7 @@ const CONTENT = {
   /* ---- LO BÁSICO --------------------------------------- */
   // TODO Jonathan: pon su nombre real / como le dices.
   name: "Mon",
-  birthdayLabel: "8 de agosto",
+  birthdayLabel: "26 de agosto",
   tabTitle: "Feliz 25, Mon",
 
   /* ---- 1. PORTADA -------------------------------------- */

@@ -1,65 +1,80 @@
 /* ============================================================
    CONTENT.JS  —  El único archivo que tienes que editar.
    Todo lo que dice el sitio vive aquí.
-   Guardas, refrescas la página, y ya.
+   Guardas, corres ./tools/bump.sh, y ya.
    ============================================================ */
 
 const CONTENT = {
 
   /* ---- LO BÁSICO --------------------------------------- */
-  // TODO Jonathan: pon su nombre real / como le dices.
-  name: "Mon",
+  name: "Amor",
   birthdayLabel: "26 de agosto",
-  tabTitle: "Feliz 25, Mon",
+  tabTitle: "Felices 25, Amor",
 
   /* ---- 1. PORTADA -------------------------------------- */
   hero: {
     eyebrow: "01 · Veinticinco vueltas al sol",
-    script: "feliz cumpleaños",     // la línea escrita a mano
-    big1: "VEINTI",
-    big2: "CINCO",
+    script: "feliz cumpleaños",     // escrito a mano, va arriba del número
+    big: "25",
     subtitle:
-      "Un rincón del internet hecho nada más para ti, con las voces de la " +
-      "gente que te quiere viviendo adentro.",
+      "Este es un pequeño regalo para ti y para celebrar tu vida. Aquí vas a " +
+      "encontrar videos de personas que te aman mucho y que quieren que lo " +
+      "recuerdes siempre.",
     scrollCue: "sigue",
   },
 
-  /* ---- 2. SOBRE ELLA ----------------------------------- */
-  // TODO Jonathan: reescribe esto con tus palabras.
-  // Puedes agregar o quitar cosas, el diseño se acomoda solo.
+  /* ---- 2. SOBRE TI ------------------------------------- */
+  /* art: "globe" | "heart" | "melt" | "door" | "sun" | "trail" | "bear"
+     Cada una es un dibujito que se mueve solo y reacciona al tocarlo. */
   about: {
-    eyebrow: "02 · Cosas ciertas",
-    title: "Veinticinco años de ti",
+    eyebrow: "02 · Sobre ti",
+    title: "Veinticinco años desde que llegaste a esta tierra",
+    art: "globe",
     intro:
-      "Pude haber escrito una sola carta larga. En vez de eso anoté las cosas " +
-      "que no quiero que se te olviden de ti misma.",
+      "Cuando Dios te pensó estoy seguro de que puso niveles de su bondad y " +
+      "ternura en ti más allá de lo usual. Puso su Gloria en ti, y estas cosas " +
+      "son algunas pocas en las que logro verla cada día a través de ti.",
     things: [
       {
-        title: "Te ríes con toda la cara",
+        title: "Tu forma de amar es única",
+        art: "heart",
         body:
-          "No de forma educada, ni bajito. Se te ríe la cara entera, y todos " +
-          "en el cuarto deciden que el día va a estar bueno.",
+          "Siempre me sorprendes con la forma en la que amas y sirves a otros. " +
+          "Puedes ver a los que nadie más ve y la necesidad de otros, y " +
+          "llenarlos de identidad recordando su cumpleaños o sus cosas " +
+          "favoritas. Tu simple presencia hace de este mundo un lugar mejor.",
       },
       {
-        title: "Haces que la gente se sienta elegida",
+        title: "Tu sonrisa me derrite",
+        art: "melt",
         body:
-          "Te acuerdas del detalle que alguien mencionó una vez, hace meses, y " +
-          "lo traes de vuelta como si importara. Porque para ti sí importaba.",
+          "No es solo lo hermosa y perfecta que es tu sonrisa, es el gozo que " +
+          "veo a través de ella y esa pureza más valiosa que todo el oro en " +
+          "este mundo.",
       },
       {
-        title: "Eres más valiente de lo que te reconoces",
+        title: "Tu valentía abre puertas a una hermosura inefable",
+        art: "door",
         body:
-          "Sigues haciendo lo difícil en silencio, sin necesitar que nadie te " +
-          "aplauda. Yo te aplaudo. Todo el tiempo.",
+          "Verte crecer y ser valiente en momentos y cosas que la mayoría de " +
+          "las personas no se atrevería es hermoso, y veo que cada vez que " +
+          "eres valiente es como si se abriera una puerta a un mundo hermoso " +
+          "de conexión contigo que me hace enamorarme más. Gracias por no " +
+          "rendirte en la vida aun cuando es difícil.",
       },
       {
-        title: "El azul se te parece",
+        title: "La vida contigo es mucho más divertida",
+        art: "sun",
         body:
-          "En todos sus tonos: cielo, aciano, cobalto, medianoche. Todo este " +
-          "sitio está hecho de tu color favorito a propósito.",
+          "Estoy seguro que cualquiera estaría de acuerdo con esta frase. El " +
+          "simple hecho de que estés en mi vida hace todo más divertido. La " +
+          "forma en la que saboreas y disfrutas cada momento es hermosa y me " +
+          "enseña tanto. Quiero ser testigo de cómo disfrutas cada día el " +
+          "resto de mi vida.",
       },
     ],
-    quote: "Quererte ha sido la cosa más fácil que he hecho en la vida.",
+    quote: "Amarte ha sido la mayor aventura de mi vida después de Jesús.",
+    quoteArt: "trail",
   },
 
   /* ---- 3. LAS VOCES ------------------------------------ */
@@ -72,7 +87,6 @@ const CONTENT = {
       "voz alta.",
     lockedLabel: "Video en camino",
     playLabel: "Reproducir",
-    specimenLabel: "espécimen",
   },
 
   /* ---- 4. LA GENTE + SUS VIDEOS ------------------------ */
@@ -82,7 +96,8 @@ const CONTENT = {
      1. Corre:  ./tools/add-video.sh ~/Desktop/loquesea.mov maria
         (comprime el clip a media/videos/maria.mp4 y saca el poster solo)
      2. Agrega una entrada abajo.
-     3. Graba la NFC con la url que sale en el README:
+     3. Corre:  ./tools/bump.sh  y haz push.
+     4. Graba la NFC con:
            https://jonnyh1801.github.io/twenty-five/#/from/maria
 
      CAMPOS
@@ -110,22 +125,20 @@ const CONTENT = {
   ],
 
   /* ---- 5. TU CARTA ------------------------------------- */
-  // TODO Jonathan: esta es tuya. Escríbela bien.
   letter: {
     eyebrow: "04 · De mí",
-    title: "Una cosa más",
+    title: "Mereces ser celebrada hoy y todos los días",
     body: [
-      "Quería darte algo que no se te pudiera perder en un cajón.",
-      "Así que le pedí a la gente que te quiere que lo dijera en voz alta, eso " +
-        "que dirían si no les diera pena ponerse sentimentales. Y luego lo " +
-        "guardé todo en un lugar al que puedas llegar cualquier noche que lo " +
-        "necesites.",
-      "Acerca una plaquita. La que sea. Cuando quieras. Van a seguir aquí a los " +
-        "treinta, y a los cincuenta, y cada vez que se te olvide cuánto espacio " +
-        "ocupas en la vida de la gente.",
-      "Feliz veinticinco, mi amor.",
+      "Estos videos van a estar aquí siempre. Son para que recuerdes lo " +
+        "increíble que eres y cómo tu vida ha impactado a otros de formas tan " +
+        "grandes y significativas.",
+      "No estás sola: tienes toda una nube de testigos echándote porras, " +
+        "listos para celebrar tu vida tan bien vivida cada día.",
     ],
-    signoff: "siempre,",
+    note: "Puedes ver todos estos videos cuando quieras haciendo tap en las placas.",
+    signoff: "Te amo con todo mi corazón",
+    fromPrefix: "Tu oso herm, prometido y novio,",
+    fromArt: "bear",
     from: "Jonathan",
   },
 

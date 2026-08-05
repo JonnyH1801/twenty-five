@@ -169,10 +169,11 @@ main{position:relative;z-index:1}
 .lede{max-width:56ch;margin:0;opacity:.72;font-size:clamp(1rem,2.1vw,1.14rem)}
 .sec-head{margin-bottom:clamp(3rem,8vw,5.5rem);max-width:46ch}
 
+/* now sits above the number, so the margin flips to the bottom */
 .script{
   font-family:var(--hand);font-weight:300;
-  font-size:clamp(1.1rem,3.8vw,1.9rem);line-height:1.1;
-  color:var(--iron);margin:.5rem 0 0;
+  font-size:clamp(1.15rem,4.2vw,2.1rem);line-height:1.1;
+  color:var(--iron);margin:0 0 .35rem;
   rotate:-3deg;transform-origin:left center;
 }
 
@@ -233,13 +234,16 @@ main{position:relative;z-index:1}
 .hero__grid>*{min-width:0}
 @media (min-width:920px){.hero__grid{grid-template-columns:1.18fr .82fr}}
 
+/* Two digits instead of a ten-letter word, so it can go much bigger.
+   Bodoni's figures have far more contrast than its caps at this size,
+   which is the whole reason for setting the number rather than
+   spelling it out. */
 .giant{
   font-family:var(--display);font-weight:900;font-optical-sizing:auto;
-  margin:0;line-height:.84;letter-spacing:-.03em;
-  font-size:clamp(3rem,14vw,8.8rem);
+  margin:0;line-height:.8;letter-spacing:-.045em;
+  font-size:clamp(7rem,30vw,15rem);
 }
 .giant__line{display:block}
-.giant__line--2{color:var(--wash);padding-left:.06em}
 /* every letter is its own span, so the word can expose across */
 .giant .ltr{display:inline-block;will-change:opacity,translate,filter}
 body.is-loading .giant .ltr{opacity:0}
@@ -285,28 +289,36 @@ body.is-loading .giant .ltr{opacity:0}
 .sheet>*{min-width:0}
 @media (min-width:880px){.sheet{grid-template-columns:1.3fr .7fr}}
 
+/* Each entry is a two-column grid: the drawing sits in the left
+   column spanning the whole row, like an illuminated initial, with
+   the number, title and body stacked in the right column. */
 .things{list-style:none;counter-reset:t;margin:0;padding:0}
 .things li{
-  counter-increment:t;position:relative;padding:1.8rem 0 1.9rem;
+  counter-increment:t;position:relative;padding:1.9rem 0 2rem;
   border-top:1px solid color-mix(in oklch,var(--pale) 22%,transparent);
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  column-gap:clamp(.9rem,3vw,1.6rem);align-items:start;
 }
 .things li:last-child{border-bottom:1px solid color-mix(in oklch,var(--pale) 22%,transparent)}
 @media (min-width:600px){.things li:nth-child(even){padding-left:clamp(1.5rem,5vw,3.5rem)}}
 .things li::before{
-  content:counter(t,decimal-leading-zero);display:block;margin-bottom:.7rem;
+  content:counter(t,decimal-leading-zero);grid-column:2;display:block;margin-bottom:.6rem;
   font-size:.64rem;font-weight:600;letter-spacing:.2em;color:var(--wash);
 }
+.thing__art{grid-column:1;grid-row:1 / -1;align-self:center}
 .things h3{
+  grid-column:2;
   font-family:var(--display);font-weight:700;font-optical-sizing:auto;
   font-size:clamp(1.3rem,3.4vw,1.85rem);line-height:1.14;
   margin:0 0 .55rem;text-wrap:balance;
 }
-.things p{margin:0;opacity:.66;max-width:50ch;font-size:.98rem}
+.things p{grid-column:2;margin:0;opacity:.72;max-width:50ch;font-size:.98rem}
 
 .about__plate{position:sticky;top:4rem;max-width:min(340px,72vw);justify-self:center}
 
-.pull{position:relative;z-index:1;margin:clamp(4rem,10vw,7rem) 0 0;padding:0}
-.pull::before{content:"";display:block;width:52px;height:1px;background:var(--iron);margin:0 auto 2.4rem}
+.pull{position:relative;z-index:1;margin:clamp(4rem,10vw,7rem) 0 0;padding:0;text-align:center}
+/* the trail drawing replaces the hairline that used to divide here */
+.pull .art{margin:0 auto 1.6rem}
 .pull p{
   font-family:var(--display);font-style:italic;font-weight:500;font-optical-sizing:auto;
   font-size:clamp(1.4rem,4.4vw,2.6rem);line-height:1.28;
@@ -366,15 +378,34 @@ body.is-loading .giant .ltr{opacity:0}
 }
 .card:hover .card__bot{scale:1.09;opacity:.2}
 
-.card__num{margin:0;font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.9}
 .card__role{margin:0;font-size:.63rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.94}
 .card__name{
   font-family:var(--display);font-weight:700;font-optical-sizing:auto;
   font-size:1.6rem;line-height:1.08;margin:0;
 }
+
+/* The line they said, given its own panel so it reads as a quote
+   pinned to the card rather than more body copy. Asymmetric corners
+   (sharp top-left, round bottom-right) keep it from looking like a
+   default input box. */
 .card__phrase{
-  font-family:var(--display);font-style:italic;font-size:1.02rem;line-height:1.42;
-  margin:0;opacity:.92;
+  position:relative;margin:.15rem 0 0;
+  padding:1.05rem 1.05rem 1.05rem 2.35rem;
+  border:1px solid color-mix(in oklch,currentColor 22%,transparent);
+  border-radius:2px 16px 2px 16px;
+  background:color-mix(in oklch,currentColor 6%,transparent);
+  font-family:var(--display);font-style:italic;
+  font-size:1.04rem;line-height:1.45;
+  transition:background .5s var(--expo),border-color .5s var(--expo);
+}
+.card__phrase::before{
+  content:"\201C";position:absolute;left:.55rem;top:.38rem;
+  font-family:var(--display);font-weight:700;font-style:normal;
+  font-size:2.5rem;line-height:1;opacity:.4;
+}
+.card:hover .card__phrase{
+  background:color-mix(in oklch,currentColor 11%,transparent);
+  border-color:color-mix(in oklch,currentColor 34%,transparent);
 }
 .card__foot{
   margin-top:auto;padding-top:1rem;display:flex;align-items:center;gap:.55rem;
@@ -412,8 +443,26 @@ body.is-loading .giant .ltr{opacity:0}
 .letter .eyebrow{opacity:.66}
 
 .prose p{margin:0 0 1.2rem;max-width:62ch;opacity:.78}
-.sign{margin:2.4rem 0 0;display:flex;flex-direction:column;gap:.25rem}
-.sign__off{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.68}
+
+/* the how-to-use-it line, lifted out of the prose so she can't miss it */
+.note{
+  margin:1.9rem 0 0;padding:1.1rem 1.3rem;max-width:52ch;
+  border-left:0;                      /* deliberately not a side stripe */
+  border:1px dashed color-mix(in oklch,var(--prussian) 38%,transparent);
+  border-radius:2px 14px 2px 14px;
+  background:color-mix(in oklch,var(--prussian) 6%,transparent);
+  font-size:.97rem;color:var(--prussian);
+}
+
+.sign{margin:2.6rem 0 0;display:flex;flex-direction:column;gap:.3rem}
+.sign__off{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(1.15rem,3vw,1.45rem);line-height:1.3;opacity:.85;
+}
+.sign__prefix{
+  display:flex;align-items:center;gap:.1rem;flex-wrap:wrap;
+  margin-top:.5rem;font-size:.86rem;opacity:.72;
+}
 .sign__name{
   font-family:var(--hand);font-weight:400;
   font-size:clamp(1.5rem,4.6vw,2.1rem);line-height:1.4;
@@ -500,6 +549,118 @@ body.is-loading .giant .ltr{opacity:0}
 .ghost:disabled{opacity:.22;cursor:default}
 
 /* =========================================================
+   LOS DIBUJITOS
+   Seven small drawings. Each idles on its own so the page is
+   alive at rest, and does something bigger on hover. Phones
+   have no hover, so app.js adds .is-poked on tap and every
+   hover rule below matches that too.
+   ========================================================= */
+.art{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:none;color:var(--wash);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .5s var(--expo);
+}
+.art:hover,.art.is-poked{color:var(--frost)}
+.art .ill{
+  width:100%;height:100%;display:block;overflow:visible;
+  fill:none;stroke:currentColor;stroke-width:2.4;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.art *{transform-box:view-box}
+
+.art--title{width:clamp(48px,11vw,70px);aspect-ratio:1;margin-left:.15em;vertical-align:-.18em}
+.art--thing{width:clamp(42px,10vw,56px);aspect-ratio:1}
+.art--quote{width:clamp(120px,30vw,190px);aspect-ratio:160/100;color:var(--iron);opacity:.9}
+.art--sign {width:clamp(38px,9vw,46px);aspect-ratio:1;vertical-align:-.7em;margin-right:.1em}
+.letter .art{color:var(--marine)}
+.letter .art:hover,.letter .art.is-poked{color:var(--prussian)}
+
+@keyframes art-spin{to{transform:rotate(360deg)}}
+
+/* la tierra ------------------------------------------------ */
+.ill--globe .mer{transform-origin:50px 50px;animation:art-merid 9s linear infinite}
+.ill--globe .m2{animation-delay:-3s}
+.ill--globe .m3{animation-delay:-6s}
+@keyframes art-merid{
+  0%{transform:scaleX(1)}50%{transform:scaleX(.02)}100%{transform:scaleX(1)}
+}
+.art:hover .ill--globe .mer,.art.is-poked .ill--globe .mer{animation-duration:2.2s}
+
+/* el corazón ----------------------------------------------- */
+.ill--heart .h-beat{transform-origin:50px 56px;animation:art-beat 2.6s ease-in-out infinite}
+@keyframes art-beat{
+  0%,70%,100%{transform:scale(1)}
+  10%{transform:scale(1.1)}22%{transform:scale(1)}32%{transform:scale(1.06)}
+}
+.ill--heart .h-ring{opacity:0;transform-origin:50px 54px;transform:scale(.66)}
+.art:hover .ill--heart .h-ring,.art.is-poked .ill--heart .h-ring{animation:art-ring 1.3s var(--expo) infinite}
+@keyframes art-ring{
+  from{opacity:.5;transform:scale(.66)}to{opacity:0;transform:scale(1.3)}
+}
+.art:hover .ill--heart .h-beat,.art.is-poked .ill--heart .h-beat{animation-duration:.9s}
+
+/* el sol derritiendo el glaciar ---------------------------- */
+.ill--melt .m-rays{transform-origin:74px 24px;animation:art-spin 26s linear infinite}
+.ill--melt .m-facet{opacity:.45}
+.ill--melt .m-pool{opacity:.5;transform-origin:33px 78.5px;animation:art-pool 3.4s ease-in-out infinite}
+@keyframes art-pool{0%,100%{transform:scaleX(.86)}50%{transform:scaleX(1)}}
+.art:hover .ill--melt .m-pool,.art.is-poked .ill--melt .m-pool{animation-duration:1.3s;opacity:.8}
+.ill--melt .drip{opacity:0;animation:art-drip 3.4s ease-in infinite}
+.ill--melt .d2{animation-delay:1.1s}
+.ill--melt .d3{animation-delay:2.2s}
+@keyframes art-drip{
+  0%{opacity:0;transform:translateY(-7px) scale(.6)}
+  25%{opacity:.95;transform:translateY(-2px) scale(1)}
+  100%{opacity:0;transform:translateY(15px) scale(.75)}
+}
+.art:hover .ill--melt .drip,.art.is-poked .ill--melt .drip{animation-duration:1.3s}
+.art:hover .ill--melt .m-rays,.art.is-poked .ill--melt .m-rays{animation-duration:5s}
+
+/* la puerta ------------------------------------------------ */
+.ill--door .d-land,.ill--door .d-land2,.ill--door .d-sun{
+  opacity:0;transition:opacity .7s var(--expo) .18s;
+}
+.ill--door .d-plank{opacity:.5}
+.ill--door .d-panel{
+  transform-origin:25px 88px;                 /* la bisagra */
+  transition:transform 1s var(--expo);
+  animation:art-ajar 7s ease-in-out infinite;
+}
+@keyframes art-ajar{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.93)}}
+.art:hover .ill--door .d-panel,.art.is-poked .ill--door .d-panel{
+  animation:none;transform:scaleX(.09);
+}
+.art:hover .ill--door .d-land,.art:hover .ill--door .d-land2,.art:hover .ill--door .d-sun,
+.art.is-poked .ill--door .d-land,.art.is-poked .ill--door .d-land2,.art.is-poked .ill--door .d-sun{
+  opacity:1;
+}
+
+/* el sol --------------------------------------------------- */
+.ill--sun .s-rays{transform-origin:50px 50px;animation:art-spin 34s linear infinite}
+.ill--sun .s-core{transform-origin:50px 50px;animation:art-breathe 4.5s ease-in-out infinite}
+@keyframes art-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.art:hover .ill--sun .s-rays,.art.is-poked .ill--sun .s-rays{
+  animation-duration:7s;scale:1.14;
+}
+.ill--sun .s-rays{transition:scale .7s var(--expo)}
+
+/* el sendero ----------------------------------------------- */
+.ill--trail .t-path{stroke-dasharray:5 8;animation:art-march 3.2s linear infinite}
+@keyframes art-march{to{stroke-dashoffset:-26}}
+.art:hover .ill--trail .t-path,.art.is-poked .ill--trail .t-path{animation-duration:1.1s}
+
+/* el osito ------------------------------------------------- */
+.ill--bear .b-eyes{transform-origin:50px 50px;animation:art-blink 5.5s ease-in-out infinite}
+@keyframes art-blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+.ill--bear .b-head{transform-origin:50px 60px;transition:transform .6s var(--expo)}
+.ill--bear .b-ear{transform-box:fill-box;transform-origin:center}
+.art:hover .ill--bear .b-head,.art.is-poked .ill--bear .b-head{transform:rotate(-5deg)}
+.art:hover .ill--bear .b-ear--l,.art.is-poked .ill--bear .b-ear--l{animation:art-wig .5s ease-in-out infinite}
+.art:hover .ill--bear .b-ear--r,.art.is-poked .ill--bear .b-ear--r{animation:art-wig .5s ease-in-out infinite .12s}
+@keyframes art-wig{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* =========================================================
    REVEAL
    ========================================================= */
 .reveal{opacity:0;translate:0 30px;transition:opacity .9s var(--expo),translate .9s var(--expo)}
@@ -513,6 +674,11 @@ body.is-loading .giant .ltr{opacity:0}
   .bot{animation:none !important;translate:none !important}
   .giant .ltr,body.is-loading .giant .ltr{opacity:1;animation:none}
   .plate__img,.plate__arch{transition:none}
+  /* the drawings hold still, but the door stays open so the
+     landscape behind it is still reachable */
+  .art *{animation:none !important;transition:none !important}
+  .ill--door .d-panel{transform:scaleX(.09)}
+  .ill--door .d-land,.ill--door .d-land2,.ill--door .d-sun{opacity:1}
   .cue i,.player{animation:none}
   .card,.rail a{transition:none}
 }

@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Feliz 25</title>
+<title>Felices 25</title>
 <meta name="theme-color" content="#07243c">
 <meta name="description" content="Un cumpleaños en algún lugar del internet.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="Feliz 25">
+<meta property="og:title" content="Felices 25">
 <meta property="og:description" content="Acerca una plaquita. Alguien tiene algo que decirte.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;0,6..96,900;1,6..96,500;1,6..96,700&family=Archivo:wght@400;500;600;700&family=Playwrite+ES:wght@200..400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20260805153951">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2307243c'/><path d='M50 90V24M50 42l-17-10M50 42l17-10M50 60l-21-12M50 60l21-12M50 78l-15-9M50 78l15-9' stroke='%23dbe9f2' stroke-width='6' stroke-linecap='round' fill='none'/></svg>">
+<link rel="stylesheet" href="css/style.css?v=20260805161338">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.92em' font-size='92'>&#128153;</text></svg>">
 </head>
 <body class="is-loading">
 
@@ -51,11 +51,10 @@
     <div class="wrap hero__grid">
       <div class="hero__type">
         <p class="eyebrow" data-c="hero.eyebrow"></p>
-        <h1 class="giant">
-          <span class="giant__line" data-split data-c="hero.big1"></span>
-          <span class="giant__line giant__line--2" data-split data-c="hero.big2"></span>
-        </h1>
         <p class="script" data-c="hero.script"></p>
+        <h1 class="giant">
+          <span class="giant__line" data-split data-c="hero.big"></span>
+        </h1>
         <p class="hero__name"><span data-c="name"></span></p>
         <p class="hero__sub" data-c="hero.subtitle"></p>
         <p class="hero__date"><span data-c="birthdayLabel"></span></p>
@@ -80,7 +79,7 @@
     <div class="wrap">
       <header class="sec-head reveal">
         <p class="eyebrow" data-c="about.eyebrow"></p>
-        <h2 class="display" data-c="about.title"></h2>
+        <h2 class="display"><span data-c="about.title"></span><span class="art art--title" data-art="about.art"></span></h2>
         <p class="lede" data-c="about.intro"></p>
       </header>
 
@@ -96,6 +95,7 @@
       </div>
 
       <blockquote class="pull reveal">
+        <span class="art art--quote" data-art="about.quoteArt"></span>
         <p data-c="about.quote"></p>
       </blockquote>
     </div>
@@ -128,8 +128,13 @@
         <p class="eyebrow" data-c="letter.eyebrow"></p>
         <h2 class="display" data-c="letter.title"></h2>
         <div class="prose" id="letterBody"></div>
+        <p class="note" data-c="letter.note"></p>
         <p class="sign">
           <span class="sign__off" data-c="letter.signoff"></span>
+          <span class="sign__prefix">
+            <span class="art art--sign" data-art="letter.fromArt"></span>
+            <span data-c="letter.fromPrefix"></span>
+          </span>
           <span class="sign__name" data-c="letter.from"></span>
         </p>
       </div>
@@ -161,7 +166,8 @@
   </div>
 </div>
 
-<script src="js/content.js?v=20260805153951"></script>
-<script src="js/app.js?v=20260805153951"></script>
+<script src="js/content.js?v=20260805161338"></script>
+<script src="js/illustrations.js"></script>
+<script src="js/app.js?v=20260805161338"></script>
 </body>
 </html>

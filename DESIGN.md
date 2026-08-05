@@ -22,7 +22,7 @@ Authored in OKLCH. Chroma stays low near both lightness extremes.
 | `--ink` | `oklch(0.185 0.052 249)` | deepest exposure. page ground, voices section |
 | `--prussian` | `oklch(0.265 0.068 246)` | the classic cyanotype blue. about section |
 | `--marine` | `oklch(0.375 0.082 243)` | the large background shapes, dark cards |
-| `--wash` | `oklch(0.615 0.072 236)` | "CINCO", small labels, hairlines |
+| `--wash` | `oklch(0.615 0.072 236)` | the drawings, small labels, hairlines |
 | `--pale` | `oklch(0.815 0.045 232)` | light card ground, secondary type on dark |
 | `--frost` | `oklch(0.930 0.022 228)` | unexposed paper. the "white" |
 | `--paper` | `oklch(0.947 0.014 88)` | warm stock. the letter section only |
@@ -96,12 +96,42 @@ Two things the generator gets right that are easy to get wrong:
   280px needs 140px of headroom above its shoulder; put the shoulder too low and
   the top silently clips flat.
 
+## The seven drawings
+
+`js/illustrations.js`. Hand-authored inline SVG, one per idea in section 02
+plus the bear on the signature: globe, heart, melt, door, sun, trail, bear.
+
+They are injected as real inline SVG rather than `<img>` because each has
+moving parts the stylesheet needs to reach.
+
+Every one idles on its own so the page is alive at rest, and does something
+larger on interaction. Phones have no hover, so `app.js` adds `.is-poked` for
+1.4s on `pointerdown` and every hover rule matches that class too.
+
+Only `transform`, `opacity` and `stroke-dashoffset` animate. Nothing touches
+SVG geometry attributes, which keeps Safari happy and avoids layout. Stroked
+shapes that get scaled carry `vector-effect="non-scaling-stroke"` so the line
+weight holds while the shape moves.
+
+Two that needed a second pass:
+
+- **melt** first read as "mountains at sunrise", which is the trail drawing.
+  Fixed by putting an actual smile inside the sun and making the ice angular
+  and faceted rather than smooth.
+- **door** was a bare arch. A knob and two plank lines are what make it read
+  as a door rather than another instance of the site's arch motif.
+
+Debugging note: transitions do not advance in a backgrounded tab, so
+`getComputedStyle` will report the pre-transition value and look like a broken
+rule. Check `document.hidden` before believing it.
+
 ## Layout
 
 - Left rail nav at ≥1100px, full-screen drawer below.
 - The "cosas ciertas" list reads as a specimen sheet: hairline rules, leading
   numbers, even rows indented so the left edge is not a straight line.
-- Cards are `auto-fit / minmax(265px, 1fr)`, no breakpoints.
+- Cards are `auto-fill / minmax(265px, 1fr)`, no breakpoints. auto-**fill**, because
+  auto-fit collapses empty tracks and a lone card would stretch the whole row.
 - Photos are arches (`border-radius: 999px 999px 8px 8px`) with a plate number
   set in italic underneath.
 
@@ -109,6 +139,6 @@ Two things the generator gets right that are easy to get wrong:
 
 - No em dashes anywhere in the copy.
 - No gradient text, no glassmorphism, no side-stripe borders.
-- No icon library. No emoji.
+- No icon library. Every drawing is hand-authored for this page.
 - Not editorial-typographic (display serif + mono labels + rules). That lane is
   saturated. This is a print archive, which is a different thing.

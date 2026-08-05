@@ -41,6 +41,29 @@
   $$(".plate__img").forEach(function (i) { i.alt = UI.photoAlt || ""; });
 
   /* =========================================================
+     1b. The drawings.
+         Injected as real inline SVG rather than <img>, because each
+         one has moving parts the stylesheet needs to reach.
+     ========================================================= */
+  var ART = window.ILLUSTRATIONS || {};
+
+  function mountArt(node, key) {
+    var svg = ART[key];
+    if (!node || !svg) return;
+    node.innerHTML = svg;
+    // phones have no hover, so a tap plays the same reaction for a beat
+    node.addEventListener("pointerdown", function () {
+      node.classList.add("is-poked");
+      clearTimeout(node._pokeT);
+      node._pokeT = setTimeout(function () { node.classList.remove("is-poked"); }, 1400);
+    });
+  }
+
+  $$("[data-art]").forEach(function (node) {
+    mountArt(node, get(C, node.getAttribute("data-art")));
+  });
+
+  /* =========================================================
      2. Split the big words into letters so the line can
         expose across instead of all at once.
      ========================================================= */
@@ -81,6 +104,11 @@
   if (thingsEl && C.about && C.about.things) {
     C.about.things.forEach(function (t) {
       var li = el("li", "reveal");
+      if (t.art) {
+        var art = el("span", "art art--thing thing__art");
+        mountArt(art, t.art);
+        li.appendChild(art);
+      }
       li.appendChild(el("h3", null, t.title));
       li.appendChild(el("p", null, t.body));
       thingsEl.appendChild(li);
@@ -90,6 +118,11 @@
   /* =========================================================
      4. La carta
      ========================================================= */
+  if (!(C.letter && C.letter.note)) {
+    var noteEl = $(".note");
+    if (noteEl) noteEl.remove();
+  }
+
   var letterEl = $("#letterBody");
   if (letterEl && C.letter && C.letter.body) {
     C.letter.body.forEach(function (p) { letterEl.appendChild(el("p", null, p)); });
@@ -106,13 +139,6 @@
     for (var i = 0; i < friends.length; i++) if (friends[i].slug === slug) return i;
     return -1;
   }
-  function roman(num) {
-    var map = [[10, "x"], [9, "ix"], [5, "v"], [4, "iv"], [1, "i"]];
-    var out = "";
-    map.forEach(function (p) { while (num >= p[0]) { out += p[1]; num -= p[0]; } });
-    return out;
-  }
-
   if (cardsEl) {
     friends.forEach(function (f, i) {
       var li = el("li", "reveal");
@@ -125,7 +151,6 @@
       mark.setAttribute("aria-hidden", "true");
       btn.appendChild(mark);
 
-      btn.appendChild(el("p", "card__num", ((V.specimenLabel || "") + " " + roman(i + 1)).trim()));
       btn.appendChild(el("p", "card__role", f.role || ""));
       btn.appendChild(el("h3", "card__name", f.name || ""));
       btn.appendChild(el("p", "card__phrase", f.phrase || ""));

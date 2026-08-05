@@ -95,34 +95,17 @@ const CONTENT = {
        shape  — "arch" | "grain" | "pebbles" | "dome" | "rings" | "stipple"
                 (el dibujo de la tarjeta; si lo dejas vacío se asigna solo)
   */
-  // TODO Jonathan: estos tres son EJEMPLOS. Bórralos y pon a la gente real.
   friends: [
     {
-      slug: "example-one",
-      name: "Sofía",
-      role: "Mejor amiga de toda la vida",
-      phrase: "Eres la única persona que nunca me ha hecho sentir que soy demasiado.",
-      video: null,
+      slug: "kayli",
+      name: "Kayli",
+      role: "Amiga, a miles de kilómetros",
+      // Sus palabras exactas, en inglés, porque así lo dijo ella.
+      phrase: "When I first met you I thought: I want what she has.",
+      video: "kayli.mp4",
+      poster: "kayli.jpg",
       accent: "sky",
       shape: "arch",
-    },
-    {
-      slug: "example-two",
-      name: "Mamá",
-      role: "Su mamá",
-      phrase: "Te vi convertirte exactamente en la mujer que esperaba que fueras.",
-      video: null,
-      accent: "cornflower",
-      shape: "pebbles",
-    },
-    {
-      slug: "example-three",
-      name: "Andrés",
-      role: "Roomie, 2019 a 2022",
-      phrase: "Nadie hace de un martes lo que tú haces de un martes.",
-      video: null,
-      accent: "cream",
-      shape: "rings",
     },
   ],
 

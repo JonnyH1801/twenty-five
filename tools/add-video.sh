@@ -39,8 +39,19 @@ POS="$ROOT/media/posters/$SLUG.jpg"
 mkdir -p "$(dirname "$VID")" "$(dirname "$POS")"
 
 echo "→ compressing $(basename "$SRC") ..."
+# Two things that matter more than the CRF:
+#
+# -r 30, because phones shoot 60 and even 120 fps and for a talking head
+# every extra frame is pure file size.
+#
+# min(1280,iw)/min(1280,ih), because plain force_original_aspect_ratio=decrease
+# scales UP to fill the box as happily as it scales down. A clip that arrives
+# already squeezed by WhatsApp would get blown up to 720p, spending megabytes
+# inventing pixels that were never in the source. min() makes 1280 a ceiling
+# instead of a target.
 ffmpeg -y -loglevel error -stats -i "$SRC" \
-  -vf "scale=w=1280:h=1280:force_original_aspect_ratio=decrease:force_divisible_by=2" \
+  -vf "scale=w='min(1280,iw)':h='min(1280,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2" \
+  -r 30 \
   -c:v libx264 -profile:v high -level 4.0 -preset slow -crf 26 -pix_fmt yuv420p \
   -c:a aac -b:a 128k -ac 2 \
   -movflags +faststart \

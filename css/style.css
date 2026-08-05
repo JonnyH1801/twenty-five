@@ -325,7 +325,11 @@ body.is-loading .giant .ltr{opacity:0}
 .cards{
   position:relative;z-index:1;list-style:none;margin:0;padding:0;
   display:grid;gap:1.2rem;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr));
+  /* auto-fill, not auto-fit: auto-fit collapses the empty tracks, so a
+     single card stretches the full width of the page and looks broken.
+     auto-fill keeps the tracks, so one card sits at one card's width
+     and the row fills up properly as more people send videos in. */
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,265px),1fr));
 }
 .card{
   position:relative;overflow:hidden;isolation:isolate;
@@ -459,13 +463,17 @@ body.is-loading .giant .ltr{opacity:0}
   font-size:clamp(2.3rem,10.5vw,4.2rem);line-height:.96;letter-spacing:-.02em;
   margin:0 0 clamp(1.5rem,5vw,2.4rem);
 }
+/* Matted to --ink rather than #000. Phone clips arrive at every aspect
+   ratio, so object-fit:contain will letterbox or pillarbox something no
+   matter what. Against black those bars read as a broken player; against
+   the page colour they read as matting and disappear. */
 .player__stage{
-  border-radius:12px;overflow:hidden;background:#000;
+  border-radius:12px;overflow:hidden;background:var(--ink);
   box-shadow:0 26px 64px color-mix(in oklch,var(--ink) 80%,transparent);
 }
 .player__stage video{
   width:100%;height:auto;display:block;
-  max-height:56svh;object-fit:contain;background:#000;
+  max-height:72svh;object-fit:contain;background:var(--ink);
 }
 .player__missing{
   padding:clamp(2.5rem,10vw,4rem) 1.5rem;text-align:center;

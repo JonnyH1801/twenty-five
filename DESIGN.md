@@ -52,9 +52,22 @@ Bodoni hairlines vanish at display sizes, so the hero runs at weight 900.
 ## Motion
 
 - `--expo: cubic-bezier(0.16, 1, 0.30, 1)`. Everything eases out. Nothing bounces.
-- **Expose.** Hero letters are individual spans that come up from blur, 52ms
-  apart. Held until `document.fonts.ready` so they do not expose in a fallback
-  serif and then snap width.
+- **Hero entrance.** The whole first screen arrives in reading order rather
+  than at once: label, then the handwriting wiping in left to right the way it
+  would actually be written, then the digits exposing out of blur 90ms apart,
+  then name, subtitle, date, and the photo rising in behind them. Held until
+  `document.fonts.ready`, so nothing animates in a fallback serif and reflows
+  when Bodoni lands. `.hero__plate` runs two animations in sequence, the
+  entrance and then a slow float; the later one wins for `translate` and the
+  entrance ends at 0 anyway, so there is no jump between them.
+- **Hero parallax.** The type block climbs at 0.22 of scroll while the photo
+  holds, and the whole grid fades out across the first screen, so leaving the
+  hero has some depth.
+- **Always opens at the top.** `history.scrollRestoration = "manual"` plus a
+  forced scroll, because browsers restore the last position and jump to a stale
+  hash. NFC deep links are exempt. The forced scroll is guarded by a
+  wheel/touch/key flag so a page opened in a background tab can never yank
+  someone back to the top mid-read.
 - **Photos stay in full colour.** An earlier build tinted them with a cyanotype
   duotone to pull them into the palette. It fought the one warm human thing on
   the page, so it is gone. The arch is a fixed frame and the photo pushes in

@@ -5,6 +5,12 @@
 (function () {
   "use strict";
 
+  // Browsers restore the last scroll position on reload and also jump to a
+  // stale #hash. Neither is what you want when the page is a gift someone
+  // opens. Turned off here, and forced to the top below once we know the
+  // URL is not an NFC deep link.
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
   var C = window.CONTENT || CONTENT;
   var VIDEO_DIR = "media/videos/";
   var POSTER_DIR = "media/posters/";
@@ -80,9 +86,13 @@
 
   function expose() {
     document.body.classList.remove("is-loading");
+    var hero = $("#hero");
+    if (hero) hero.classList.add("is-ready");
     if (CALM) return;
+    // 560ms puts the digits after the eyebrow and the handwriting, so the
+    // hero arrives in reading order instead of all at once
     $$(".giant .ltr").forEach(function (s, i) {
-      s.style.animationDelay = 90 + i * 52 + "ms";
+      s.style.animationDelay = 560 + i * 90 + "ms";
       s.classList.add("is-lit");
     });
   }
@@ -267,6 +277,25 @@
     openFriend(i);
   }
   window.addEventListener("hashchange", route);
+
+  // Anything that is not #/from/<slug> opens at the very top. The deep
+  // links are left alone: the player covers the page anyway, and an
+  // unknown slug has its own fallback inside route().
+  if (!/^#\/from\//.test(location.hash)) {
+    // The deferred calls are what actually beat the browser's own restore,
+    // but they must never fight a real scroll: rAF and load can fire long
+    // after the fact if the page opened in a background tab, and yanking
+    // someone back to the top mid-read would be awful.
+    var moved = false;
+    var mark = function () { moved = true; };
+    ["wheel", "touchstart", "keydown"].forEach(function (e) {
+      window.addEventListener(e, mark, { passive: true, once: true });
+    });
+    var toTop = function () { if (!moved) window.scrollTo(0, 0); };
+    toTop();
+    requestAnimationFrame(toTop);
+    window.addEventListener("load", toTop, { once: true });
+  }
   route();
 
   /* =========================================================
@@ -329,8 +358,20 @@
     });
     var ticking = false;
 
+    var heroType = $(".hero__type");
+    var heroGrid = $(".hero__grid");
+
     function place() {
       var h = window.innerHeight;
+
+      // the type climbs slower than the page and the whole hero recedes,
+      // so leaving the first screen has some depth to it
+      if (heroType && window.scrollY < h * 1.3) {
+        var y = window.scrollY;
+        heroType.style.translate = "0 " + (y * 0.22).toFixed(1) + "px";
+        heroGrid.style.opacity = Math.max(0, 1 - y / (h * 0.8)).toFixed(3);
+      }
+
       drifters.forEach(function (d) {
         var r = d.node.getBoundingClientRect();
         if (r.bottom < -240 || r.top > h + 240) return;

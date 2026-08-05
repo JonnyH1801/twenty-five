@@ -24,7 +24,7 @@ const CONTENT = {
   },
 
   /* ---- 2. SOBRE TI ------------------------------------- */
-  /* art: "globe" | "heart" | "melt" | "door" | "sun" | "trail" | "bear"
+  /* art: "globe" | "heart" | "melt" | "door" | "sun" | "trail" | "tap" | "bear"
      Cada una es un dibujito que se mueve solo y reacciona al tocarlo. */
   about: {
     eyebrow: "02 · Sobre ti",
@@ -136,6 +136,7 @@ const CONTENT = {
         "listos para celebrar tu vida tan bien vivida cada día.",
     ],
     note: "Puedes ver todos estos videos cuando quieras haciendo tap en las placas.",
+    noteArt: "tap",
     signoff: "Te amo con todo mi corazón",
     fromPrefix: "Tu oso herm, prometido y novio,",
     fromArt: "bear",

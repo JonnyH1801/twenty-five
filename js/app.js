@@ -179,6 +179,7 @@
   var nameEl = $("#playerName");
   var roleEl = $("#playerRole");
   var phraseEl = $("#playerPhrase");
+  var attribEl = $("#playerAttrib");
   var prevBtn = $("#prevBtn");
   var nextBtn = $("#nextBtn");
   var current = -1;
@@ -197,6 +198,7 @@
     nameEl.textContent = f.name || "";
     roleEl.textContent = f.role || "";
     phraseEl.textContent = f.phrase || "";
+    attribEl.textContent = f.name || "";
 
     clearStage();
     if (f.video) {

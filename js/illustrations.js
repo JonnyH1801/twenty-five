@@ -18,17 +18,43 @@
 
 window.ILLUSTRATIONS = {
 
-  /* ---- la tierra: gira despacio, gira más rápido si la tocas ---- */
+  /* ---- la tierra ----
+     An actual globe: land masses drawn once, laid down twice side by
+     side, and slid left inside a circular clip. When the second copy
+     reaches where the first started the loop repeats, so the world
+     turns continuously with no seam.
+
+     The parallels stay put on purpose. Latitude lines do not move when
+     a sphere spins on its axis, only the land does, and that is what
+     sells it as rotation rather than a texture sliding past. ---- */
   globe: `
 <svg viewBox="0 0 100 100" class="ill ill--globe" aria-hidden="true">
-  <g class="ill-globe">
-    <circle cx="50" cy="50" r="33"/>
-    <path d="M17 50h66"/>
-    <path d="M23 33h54M23 67h54"/>
-    <g class="mer m1"><ellipse cx="50" cy="50" rx="33" ry="33" vector-effect="non-scaling-stroke"/></g>
-    <g class="mer m2"><ellipse cx="50" cy="50" rx="33" ry="33" vector-effect="non-scaling-stroke"/></g>
-    <g class="mer m3"><ellipse cx="50" cy="50" rx="33" ry="33" vector-effect="non-scaling-stroke"/></g>
+  <defs>
+    <clipPath id="artGlobeClip"><circle cx="50" cy="50" r="33"/></clipPath>
+    <!-- Coastlines have to be irregular and angular. Smooth blobs read
+         as bubbles or craters, not as land. -->
+    <g id="artGlobeLand" fill="currentColor" stroke="none" opacity="0.55">
+      <path d="M9 22 19 20 23 29 17 35 21 43 15 53 17 63 10 72 5 59 10 46 3 35Z"/>
+      <path d="M35 21 47 19 53 27 48 34 53 45 46 60 39 72 33 56 36 41 29 32Z"/>
+      <path d="M57 18 76 16 89 23 84 32 70 36 61 31 55 26Z"/>
+      <path d="M67 40 74 39 71 51Z"/>
+      <path d="M79 57 90 55 94 63 85 70 76 65Z"/>
+      <path d="M24 76 32 74 34 81 26 83Z"/>
+    </g>
+  </defs>
+
+  <g clip-path="url(#artGlobeClip)">
+    <g class="g-land">
+      <use href="#artGlobeLand"/>
+      <use href="#artGlobeLand" x="100"/>
+    </g>
+    <g class="g-par">
+      <path d="M20 34q30 8 60 0"/>
+      <path d="M17 50h66"/>
+      <path d="M20 66q30-8 60 0"/>
+    </g>
   </g>
+  <circle class="g-rim" cx="50" cy="50" r="33"/>
 </svg>`,
 
   /* ---- el corazón: late ---- */
@@ -100,6 +126,28 @@ window.ILLUSTRATIONS = {
   <path class="t-mtn2" d="M44 30 55 44 33 44Z"/>
   <path class="t-path" d="M78 98c-8-14 16-18 8-32s10-20 6-32"/>
   <path d="M2 86h156"/>
+</svg>`,
+
+  /* ---- el teléfono tocando la placa ----
+     The ripples read outward from the tag, and the phone leans in when
+     you touch it, which is the whole gesture the tags are for. ---- */
+  tap: `
+<svg viewBox="0 0 100 100" class="ill ill--tap" aria-hidden="true">
+  <g class="t-phone">
+    <rect x="8" y="18" width="34" height="64" rx="7"/>
+    <path d="M19 26h12"/>
+    <path d="M25 74h.5" stroke-width="4"/>
+  </g>
+  <g class="t-waves">
+    <path class="w1" d="M52 42a13 13 0 0 0 0 16"/>
+    <path class="w2" d="M46 37a20 20 0 0 0 0 26"/>
+    <path class="w3" d="M40 32a27 27 0 0 0 0 36"/>
+  </g>
+  <g class="t-chip">
+    <rect x="64" y="36" width="27" height="27" rx="6"/>
+    <path d="M71 49a7 7 0 0 1 13 0"/>
+    <circle cx="77.5" cy="55" r="1.8" fill="currentColor" stroke="none"/>
+  </g>
 </svg>`,
 
   /* ---- el osito: parpadea, y mueve las orejas si lo tocas ---- */

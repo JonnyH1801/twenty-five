@@ -390,7 +390,7 @@ body.is-loading .giant .ltr{opacity:0}
    default input box. */
 .card__phrase{
   position:relative;margin:.15rem 0 0;
-  padding:1.05rem 1.05rem 1.05rem 2.35rem;
+  padding:1.05rem 1.05rem 1.05rem 2.1rem;
   border:1px solid color-mix(in oklch,currentColor 22%,transparent);
   border-radius:2px 16px 2px 16px;
   background:color-mix(in oklch,currentColor 6%,transparent);
@@ -399,9 +399,9 @@ body.is-loading .giant .ltr{opacity:0}
   transition:background .5s var(--expo),border-color .5s var(--expo);
 }
 .card__phrase::before{
-  content:"\201C";position:absolute;left:.55rem;top:.38rem;
+  content:"\00AB";position:absolute;left:.7rem;top:.85rem;
   font-family:var(--display);font-weight:700;font-style:normal;
-  font-size:2.5rem;line-height:1;opacity:.4;
+  font-size:1.5rem;line-height:1;opacity:.5;
 }
 .card:hover .card__phrase{
   background:color-mix(in oklch,currentColor 11%,transparent);
@@ -446,13 +446,15 @@ body.is-loading .giant .ltr{opacity:0}
 
 /* the how-to-use-it line, lifted out of the prose so she can't miss it */
 .note{
-  margin:1.9rem 0 0;padding:1.1rem 1.3rem;max-width:52ch;
-  border-left:0;                      /* deliberately not a side stripe */
+  margin:1.9rem 0 0;padding:1.1rem 1.3rem;max-width:54ch;
   border:1px dashed color-mix(in oklch,var(--prussian) 38%,transparent);
   border-radius:2px 14px 2px 14px;
   background:color-mix(in oklch,var(--prussian) 6%,transparent);
   font-size:.97rem;color:var(--prussian);
+  display:flex;align-items:center;gap:1rem;
 }
+.note p{margin:0}
+.art--note{width:clamp(44px,11vw,58px);aspect-ratio:1}
 
 .sign{margin:2.6rem 0 0;display:flex;flex-direction:column;gap:.3rem}
 .sign__off{
@@ -529,13 +531,45 @@ body.is-loading .giant .ltr{opacity:0}
   background:var(--prussian);color:var(--pale);
   font-family:var(--display);font-style:italic;font-size:1.15rem;
 }
-.player__quote{margin:clamp(1.8rem,6vw,2.6rem) 0 0;padding:0}
+/* The line they said. This is the whole reason the page exists, so it
+   gets a panel of its own rather than sitting loose under the video:
+   tinted ground, asymmetric corners matching the cards, an oversize
+   ochre quote breaking the top edge, and one of the site's shapes
+   watermarked into the corner. */
+.player__quote{
+  position:relative;overflow:hidden;isolation:isolate;
+  margin:clamp(1.8rem,6vw,2.6rem) 0 0;
+  padding:clamp(1.9rem,5.5vw,2.5rem) clamp(1.3rem,4vw,2rem) clamp(1.5rem,4vw,1.9rem);
+  border:1px solid color-mix(in oklch,var(--wash) 32%,transparent);
+  border-radius:3px 24px 3px 24px;
+  background:color-mix(in oklch,var(--marine) 30%,transparent);
+}
+/* A guillemet, not a curly double quote. Bodoni draws " as two heavy
+   ball terminals with almost no tail, which at display size reads as a
+   colon rather than a quotation mark. « is an unmistakable chevron, and
+   it is the correct opening quote in Spanish besides. */
+.player__quote::before{
+  content:"\00AB";position:absolute;left:1rem;top:.75rem;
+  font-family:var(--display);font-weight:700;font-style:normal;
+  font-size:clamp(2rem,7vw,2.6rem);line-height:1;
+  color:var(--iron);opacity:.85;
+}
+.player__quoteBot{
+  position:absolute;right:-8%;bottom:-22%;width:44%;height:130%;
+  aspect-ratio:auto;z-index:-1;opacity:.13;color:var(--pale);
+  mask-size:contain;-webkit-mask-size:contain;
+  mask-position:bottom right;-webkit-mask-position:bottom right;
+}
 .player__quote p{
   font-family:var(--display);font-style:italic;font-weight:500;font-optical-sizing:auto;
-  font-size:clamp(1.3rem,5.2vw,2rem);line-height:1.34;margin:0;text-wrap:pretty;
+  font-size:clamp(1.25rem,5vw,1.9rem);line-height:1.36;margin:0;text-wrap:pretty;
 }
-.player__quote p::before{content:"«\2009"}
-.player__quote p::after{content:"\2009»"}
+.player__attrib{
+  margin-top:1.1rem;padding-top:.9rem;
+  border-top:1px solid color-mix(in oklch,var(--wash) 26%,transparent);
+  font-size:.64rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--pale);
+}
 
 .player__pager{margin-top:auto;padding-top:clamp(2.5rem,8vw,4rem);display:flex;justify-content:space-between;gap:1rem}
 .ghost{
@@ -579,13 +613,22 @@ body.is-loading .giant .ltr{opacity:0}
 @keyframes art-spin{to{transform:rotate(360deg)}}
 
 /* la tierra ------------------------------------------------ */
-.ill--globe .mer{transform-origin:50px 50px;animation:art-merid 9s linear infinite}
-.ill--globe .m2{animation-delay:-3s}
-.ill--globe .m3{animation-delay:-6s}
-@keyframes art-merid{
-  0%{transform:scaleX(1)}50%{transform:scaleX(.02)}100%{transform:scaleX(1)}
-}
-.art:hover .ill--globe .mer,.art.is-poked .ill--globe .mer{animation-duration:2.2s}
+/* the land is laid down twice, 100 apart, and slides one full width
+   before looping, so the seam never shows */
+.ill--globe .g-land{animation:art-globe 26s linear infinite}
+@keyframes art-globe{to{transform:translateX(-100px)}}
+.ill--globe .g-par{opacity:.26;stroke-width:1.8}
+.ill--globe .g-rim{stroke-width:2.6}
+.art:hover .ill--globe .g-land,.art.is-poked .ill--globe .g-land{animation-duration:7s}
+
+/* el teléfono tocando la placa ----------------------------- */
+.ill--tap .t-waves path{opacity:0;animation:art-ping 2.4s ease-out infinite}
+.ill--tap .w2{animation-delay:.28s}
+.ill--tap .w3{animation-delay:.56s}
+@keyframes art-ping{0%{opacity:0}22%{opacity:.95}70%{opacity:0}100%{opacity:0}}
+.ill--tap .t-phone{transition:translate .5s var(--expo)}
+.art:hover .ill--tap .t-phone,.art.is-poked .ill--tap .t-phone{translate:5px 0}
+.art:hover .ill--tap .t-waves path,.art.is-poked .ill--tap .t-waves path{animation-duration:1s}
 
 /* el corazón ----------------------------------------------- */
 .ill--heart .h-beat{transform-origin:50px 56px;animation:art-beat 2.6s ease-in-out infinite}

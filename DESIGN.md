@@ -96,10 +96,11 @@ Two things the generator gets right that are easy to get wrong:
   280px needs 140px of headroom above its shoulder; put the shoulder too low and
   the top silently clips flat.
 
-## The seven drawings
+## The eight drawings
 
 `js/illustrations.js`. Hand-authored inline SVG, one per idea in section 02
-plus the bear on the signature: globe, heart, melt, door, sun, trail, bear.
+plus the bear on the signature and the phone-and-tag on the closing note:
+globe, heart, melt, door, sun, trail, tap, bear.
 
 They are injected as real inline SVG rather than `<img>` because each has
 moving parts the stylesheet needs to reach.
@@ -113,13 +114,20 @@ SVG geometry attributes, which keeps Safari happy and avoids layout. Stroked
 shapes that get scaled carry `vector-effect="non-scaling-stroke"` so the line
 weight holds while the shape moves.
 
-Two that needed a second pass:
+Three that needed a second pass:
 
 - **melt** first read as "mountains at sunrise", which is the trail drawing.
   Fixed by putting an actual smile inside the sun and making the ice angular
   and faceted rather than smooth.
 - **door** was a bare arch. A knob and two plank lines are what make it read
   as a door rather than another instance of the site's arch motif.
+- **globe** first drew its continents as smooth blobs, which read as bubbles
+  or craters. Coastlines have to be angular and irregular. It rotates by
+  laying the land down twice, 100 units apart, inside a circular clip and
+  sliding it one full width before looping, so there is no seam. The
+  parallels deliberately stay put: latitude lines do not move when a sphere
+  spins on its axis, and holding them still is what sells it as rotation
+  rather than a texture sliding past.
 
 Debugging note: transitions do not advance in a backgrounded tab, so
 `getComputedStyle` will report the pre-transition value and look like a broken
@@ -138,6 +146,9 @@ rule. Check `document.hidden` before believing it.
 ## Deliberately not
 
 - No em dashes anywhere in the copy.
+- No curly double quote as a display glyph. Bodoni draws `"` as two heavy ball
+  terminals with almost no tail, which reads as a colon at size. The quote
+  panels use `«`, which is also the correct opening quote in Spanish.
 - No gradient text, no glassmorphism, no side-stripe borders.
 - No icon library. Every drawing is hand-authored for this page.
 - Not editorial-typographic (display serif + mono labels + rules). That lane is

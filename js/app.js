@@ -359,18 +359,31 @@
     var ticking = false;
 
     var heroType = $(".hero__type");
-    var heroGrid = $(".hero__grid");
+    // Side by side above this width, stacked below it. Has to match the
+    // breakpoint on .hero__grid in the stylesheet.
+    var wide = window.matchMedia("(min-width: 920px)");
+
+    /* Only the type fades and drifts, never the photo.
+       Both used to live on .hero__grid, which broke on phones: stacked,
+       the photo sits at the bottom of a tall hero, so she has to scroll
+       most of a screen before it comes into view, by which point a fade
+       keyed to scroll distance has already run it down to nothing. The
+       drift was worse, pushing the type down into the photo it sits above.
+       The photo now just scrolls, and is fully lit whenever she reaches it. */
+    function placeHero() {
+      if (!heroType) return;
+      var h = window.innerHeight;
+      var y = window.scrollY;
+      if (y > h * 1.3) return;
+      heroType.style.opacity = Math.max(0, 1 - y / (h * 0.85)).toFixed(3);
+      heroType.style.translate = wide.matches
+        ? "0 " + (y * 0.22).toFixed(1) + "px"
+        : "";
+    }
 
     function place() {
       var h = window.innerHeight;
-
-      // the type climbs slower than the page and the whole hero recedes,
-      // so leaving the first screen has some depth to it
-      if (heroType && window.scrollY < h * 1.3) {
-        var y = window.scrollY;
-        heroType.style.translate = "0 " + (y * 0.22).toFixed(1) + "px";
-        heroGrid.style.opacity = Math.max(0, 1 - y / (h * 0.8)).toFixed(3);
-      }
+      placeHero();
 
       drifters.forEach(function (d) {
         var r = d.node.getBoundingClientRect();
@@ -388,6 +401,9 @@
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    // crossing the breakpoint (a phone turning sideways) has to clear the
+    // stale inline translate rather than leave the type shoved down
+    wide.addEventListener("change", placeHero);
     place();
   }
 })();

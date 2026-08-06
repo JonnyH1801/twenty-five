@@ -60,9 +60,14 @@ Bodoni hairlines vanish at display sizes, so the hero runs at weight 900.
   when Bodoni lands. `.hero__plate` runs two animations in sequence, the
   entrance and then a slow float; the later one wins for `translate` and the
   entrance ends at 0 anyway, so there is no jump between them.
-- **Hero parallax.** The type block climbs at 0.22 of scroll while the photo
-  holds, and the whole grid fades out across the first screen, so leaving the
-  hero has some depth.
+- **Hero parallax.** Only the type block moves and fades; the photo never
+  does. Both used to live on `.hero__grid`, which broke on phones: stacked,
+  the photo sits at the bottom of a tall hero, so you scroll most of a screen
+  before it comes into view, by which point a fade keyed to scroll distance
+  has already run it down to nothing. The drift was worse, pushing the type
+  down into the photo below it until the date pill overlapped her face. The
+  climb is now desktop-only (≥920px, where the two sit side by side) and the
+  fade lives on the type alone.
 - **Always opens at the top.** `history.scrollRestoration = "manual"` plus a
   forced scroll, because browsers restore the last position and jump to a stale
   hash. NFC deep links are exempt. The forced scroll is guarded by a

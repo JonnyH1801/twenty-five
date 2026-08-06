@@ -230,8 +230,8 @@ main{position:relative;z-index:1}
 .hero__arch {color:var(--marine);opacity:.6;left:-11%;top:-4%;width:min(46vw,360px)}
 .hero__grain{color:var(--wash); opacity:.3;right:-8%;bottom:2%;width:min(62vw,440px)}
 
-.hero__grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:center;will-change:opacity}
-.hero__type{will-change:translate}
+.hero__grid{position:relative;z-index:1;display:grid;gap:clamp(2.5rem,6vw,4.5rem);align-items:center}
+.hero__type{will-change:translate,opacity}
 .hero__grid>*{min-width:0}
 @media (min-width:920px){.hero__grid{grid-template-columns:1.18fr .82fr}}
 
@@ -760,8 +760,7 @@ body.is-loading .cue{opacity:0}
   .hero.is-ready .eyebrow,.hero.is-ready .script,.hero.is-ready .hero__name,
   .hero.is-ready .hero__sub,.hero.is-ready .hero__date,.hero.is-ready .cue,
   .hero.is-ready .hero__plate{animation:none;opacity:1;translate:0 0;scale:1;clip-path:none}
-  .hero__type{translate:none !important}
-  .hero__grid{opacity:1 !important}
+  .hero__type{translate:none !important;opacity:1 !important}
   .plate__img,.plate__arch{transition:none}
   /* the drawings hold still, but the door stays open so the
      landscape behind it is still reachable */

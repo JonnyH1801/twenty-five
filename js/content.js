@@ -164,6 +164,16 @@ const CONTENT = {
       shape: "rings",
     },
     {
+      slug: "pri",
+      name: "Pri",
+      role: "Su mejor amiga, después de su hermana",
+      phrase: "25 años que esta tierra ha sido bendecida porque tú la has caminado.",
+      video: "pri.mp4",
+      poster: "pri.jpg",
+      accent: "azure",
+      shape: "arch",
+    },
+    {
       slug: "val",
       name: "Val",
       role: "Amiga, de cafés y pláticas",

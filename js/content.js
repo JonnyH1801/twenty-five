@@ -146,7 +146,7 @@ const CONTENT = {
     {
       slug: "harry",
       name: "Harry",
-      role: "Amigo",
+      role: "Amigo fiel",
       phrase: "Que sigas cambiando al mundo con tu alegría.",
       video: "harry.mp4",
       poster: "harry.jpg",

@@ -5,6 +5,10 @@
 #
 #  usage:   ./tools/add-video.sh <raw-clip> <slug> [poster-seconds]
 #  example: ./tools/add-video.sh ~/Desktop/sofia.MOV sofia
+#
+#  Keep the raw clip OUTSIDE media/videos/. That is where this script
+#  writes, and on a case-insensitive disk Sofia.mp4 and sofia.mp4 are one
+#  file. The script refuses that case now, but do not set it up.
 #           ./tools/add-video.sh ~/Desktop/mama.mp4 mama 4
 #
 #  writes:  media/videos/<slug>.mp4
@@ -37,6 +41,26 @@ fi
 VID="$ROOT/media/videos/$SLUG.mp4"
 POS="$ROOT/media/posters/$SLUG.jpg"
 mkdir -p "$(dirname "$VID")" "$(dirname "$POS")"
+
+# Refuse to read and write the same file.
+#
+# macOS filesystems are case-insensitive, so a source dropped in as
+# media/videos/Bethy.mp4 IS media/videos/bethy.mp4, which is exactly where
+# this script writes. ffmpeg happily truncates the input while it is still
+# reading it and the original is gone. That destroyed four irreplaceable
+# videos once; it does not get to happen twice.
+#
+# -ef compares canonical paths case-insensitively on a case-insensitive
+# volume, which a plain string compare would miss.
+if [[ "$SRC" -ef "$VID" ]]; then
+  echo "error: the source and the output are the same file." >&2
+  echo "       $SRC" >&2
+  echo "       $VID" >&2
+  echo "" >&2
+  echo "       This would overwrite the original while reading it. Keep raw" >&2
+  echo "       clips outside media/videos/ (say _source/) and re-run." >&2
+  exit 1
+fi
 
 echo "→ compressing $(basename "$SRC") ..."
 # Two things that matter more than the CRF:

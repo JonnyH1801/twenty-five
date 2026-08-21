@@ -116,7 +116,8 @@ const CONTENT = {
     {
       slug: "yec-joel",
       name: "Yec y Joel",
-      role: "Su hermana y Joel",
+      // Sus palabras: "gracias por ser mi hermana, mi mejor amiga".
+      role: "Su hermana y mejor amiga",
       phrase: "Gracias por siempre recordarme quién soy y ser mi persona favorita en el mundo.",
       video: "yec-joel.mp4",
       poster: "yec-joel.jpg",
@@ -178,7 +179,9 @@ const CONTENT = {
     {
       slug: "pri",
       name: "Pri",
-      role: "Su mejor amiga, después de su hermana",
+      // De su video: vivieron juntas, y "yo en tu historia, tú en mi
+      // historia, en nuestra historia".
+      role: "Su compañera de historia",
       phrase: "25 años que esta tierra ha sido bendecida porque tú la has caminado.",
       // Esto lo escribió ella aparte, no lo dice en el video.
       written:

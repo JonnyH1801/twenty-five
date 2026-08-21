@@ -190,6 +190,9 @@
   var roleEl = $("#playerRole");
   var phraseEl = $("#playerPhrase");
   var attribEl = $("#playerAttrib");
+  var writtenEl = $("#playerWritten");
+  var writtenTextEl = $("#playerWrittenText");
+  $("#playerWrittenLabel").textContent = UI.writtenLabel || "";
   var prevBtn = $("#prevBtn");
   var nextBtn = $("#nextBtn");
   var current = -1;
@@ -209,6 +212,13 @@
     roleEl.textContent = f.role || "";
     phraseEl.textContent = f.phrase || "";
     attribEl.textContent = f.name || "";
+
+    // Some people wrote something as well as recording. It gets its own
+    // block rather than being folded into the quote, because one was said
+    // out loud and the other was sat down and written, and that is a
+    // different kind of thing to receive.
+    writtenEl.hidden = !f.written;
+    writtenTextEl.textContent = f.written || "";
 
     clearStage();
     if (f.video) {

@@ -105,12 +105,24 @@ const CONTENT = {
        name   — como ella les dice
        role   — "Mejor amiga desde 2014", "Su mamá", "Su roomie", ...
        phrase — LA frase de su video. Corta y que pegue.
+       written — opcional. Algo que esa persona escribió aparte del video.
+                 Sale abajo del video, marcado como escrito, no dicho.
        video  — nombre del archivo en media/videos/ , o null si no está grabado
        accent — "sky" | "azure" | "cornflower" | "cream"  (color de la tarjeta)
        shape  — "arch" | "grain" | "pebbles" | "dome" | "rings" | "stipple"
                 (el dibujo de la tarjeta; si lo dejas vacío se asigna solo)
   */
   friends: [
+    {
+      slug: "yec-joel",
+      name: "Yec y Joel",
+      role: "Su hermana y Joel",
+      phrase: "Gracias por siempre recordarme quién soy y ser mi persona favorita en el mundo.",
+      video: "yec-joel.mp4",
+      poster: "yec-joel.jpg",
+      accent: "cream",
+      shape: "pebbles",
+    },
     {
       slug: "kayli",
       name: "Kayli",
@@ -168,6 +180,10 @@ const CONTENT = {
       name: "Pri",
       role: "Su mejor amiga, después de su hermana",
       phrase: "25 años que esta tierra ha sido bendecida porque tú la has caminado.",
+      // Esto lo escribió ella aparte, no lo dice en el video.
+      written:
+        "Cada momento contigo ha sido una flor añadida al jardín de las " +
+        "memorias, cuya fragancia hace reverdecer hasta los lugares más secos.",
       video: "pri.mp4",
       poster: "pri.jpg",
       accent: "azure",
@@ -182,6 +198,16 @@ const CONTENT = {
       poster: "val.jpg",
       accent: "cream",
       shape: "stipple",
+    },
+    {
+      slug: "laurel",
+      name: "Laurel",
+      role: "Amiga, desde las montañas",
+      phrase: "You've woven yourself into my heart and into my life.",
+      video: "laurel.mp4",
+      poster: "laurel.jpg",
+      accent: "cornflower",
+      shape: "dome",
     },
   ],
 
@@ -216,6 +242,7 @@ const CONTENT = {
     prev: "Anterior",
     next: "Siguiente",
     notFilmed: "Este todavía no se ha grabado.",
+    writtenLabel: "Y además te escribió esto",
     photoAlt: "Foto suya",
   },
 

@@ -611,6 +611,27 @@ body.is-loading .cue{opacity:0}
   color:var(--pale);
 }
 
+/* Something the person wrote, as opposed to said. Deliberately not
+   styled like the spoken quote: no guillemet, a dashed rule instead of a
+   solid panel, and the ochre label naming what it is. Receiving a written
+   note is a different thing from hearing someone say it. */
+.player__written{
+  margin:clamp(1.1rem,4vw,1.6rem) 0 0;
+  padding:clamp(1.1rem,4vw,1.4rem) clamp(1.1rem,4vw,1.5rem);
+  border:1px dashed color-mix(in oklch,var(--wash) 40%,transparent);
+  border-radius:16px 3px 16px 3px;
+}
+.player__written[hidden]{display:none}
+.player__writtenLabel{
+  margin:0 0 .6rem;color:var(--iron);
+  font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+}
+.player__writtenText{
+  margin:0;color:var(--pale);
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(1rem,3.6vw,1.2rem);line-height:1.5;text-wrap:pretty;
+}
+
 .player__pager{margin-top:auto;padding-top:clamp(2.5rem,8vw,4rem);display:flex;justify-content:space-between;gap:1rem}
 .ghost{
   background:none;cursor:pointer;color:var(--pale);border-radius:99px;

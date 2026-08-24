@@ -236,7 +236,7 @@ const CONTENT = {
     {
       slug: "elijah",
       name: "Elijah",
-      role: "Amigo",
+      role: "El jefe más divertido",
       // Sus palabras exactas, en inglés.
       phrase: "Your voice is powerful. Let it out to the world, because the world needs it.",
       video: "elijah.mp4",

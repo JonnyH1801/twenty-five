@@ -115,7 +115,7 @@ const CONTENT = {
   friends: [
     {
       slug: "yec-joel",
-      name: "Yec y Joel",
+      name: "Yec y Joelito",
       // Sus palabras: "gracias por ser mi hermana, mi mejor amiga".
       role: "Su hermana y mejor amiga",
       phrase: "Gracias por siempre recordarme quién soy y ser mi persona favorita en el mundo.",
@@ -211,6 +211,27 @@ const CONTENT = {
       poster: "laurel.jpg",
       accent: "cornflower",
       shape: "dome",
+    },
+    {
+      slug: "sam-ellie",
+      name: "Sam y Ellie",
+      role: "Amigos",
+      phrase: "Esta etapa tan hermosa en la cual el Señor está entrando contigo de la mano.",
+      video: "sam-ellie.mp4",
+      poster: "sam-ellie.jpg",
+      accent: "sky",
+      shape: "grain",
+    },
+    {
+      slug: "glenn-phyllis",
+      name: "Glenn y Phyllis",
+      role: "Con quienes trabaja y hace vida",
+      // Sus palabras exactas, en inglés.
+      phrase: "The first time we saw you in San Miguel, I fell in love with you instantly.",
+      video: "glenn-phyllis.mp4",
+      poster: "glenn-phyllis.jpg",
+      accent: "azure",
+      shape: "stipple",
     },
   ],
 

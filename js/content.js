@@ -215,7 +215,7 @@ const CONTENT = {
     {
       slug: "sam-ellie",
       name: "Sam y Ellie",
-      role: "Amigos",
+      role: "Amigos de años",
       phrase: "Esta etapa tan hermosa en la cual el Señor está entrando contigo de la mano.",
       video: "sam-ellie.mp4",
       poster: "sam-ellie.jpg",
@@ -232,6 +232,17 @@ const CONTENT = {
       poster: "glenn-phyllis.jpg",
       accent: "azure",
       shape: "stipple",
+    },
+    {
+      slug: "elijah",
+      name: "Elijah",
+      role: "Amigo",
+      // Sus palabras exactas, en inglés.
+      phrase: "Your voice is powerful. Let it out to the world, because the world needs it.",
+      video: "elijah.mp4",
+      poster: "elijah.jpg",
+      accent: "cornflower",
+      shape: "rings",
     },
   ],
 
@@ -266,7 +277,7 @@ const CONTENT = {
     prev: "Anterior",
     next: "Siguiente",
     notFilmed: "Este todavía no se ha grabado.",
-    writtenLabel: "Y además te escribió esto",
+    writtenLabel: "En sus propias palabras:",
     photoAlt: "Foto suya",
   },
 

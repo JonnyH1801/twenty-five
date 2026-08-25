@@ -103,7 +103,8 @@ const CONTENT = {
      CAMPOS
        slug   — minúsculas, sin espacios. Esto es lo que va en la NFC.
        name   — como ella les dice
-       role   — "Mejor amiga desde 2014", "Su mamá", "Su roomie", ...
+       role   — le habla a ELLA, en segunda persona: "Tu mamá", "Tu prima",
+                "Amiga desde 2014". Nunca "Su mamá".
        phrase — LA frase de su video. Corta y que pegue.
        written — opcional. Algo que esa persona escribió aparte del video.
                  Sale abajo del video, marcado como escrito, no dicho.
@@ -117,7 +118,7 @@ const CONTENT = {
       slug: "yec-joel",
       name: "Yec y Joelito",
       // Sus palabras: "gracias por ser mi hermana, mi mejor amiga".
-      role: "Su hermana y mejor amiga",
+      role: "Tu hermana y mejor amiga",
       phrase: "Gracias por siempre recordarme quién soy y ser mi persona favorita en el mundo.",
       video: "yec-joel.mp4",
       poster: "yec-joel.jpg",
@@ -181,7 +182,7 @@ const CONTENT = {
       name: "Pri",
       // De su video: vivieron juntas, y "yo en tu historia, tú en mi
       // historia, en nuestra historia".
-      role: "Su compañera de historia",
+      role: "Tu compañera de historia",
       phrase: "25 años que esta tierra ha sido bendecida porque tú la has caminado.",
       // Esto lo escribió ella aparte, no lo dice en el video.
       written:
@@ -225,7 +226,7 @@ const CONTENT = {
     {
       slug: "glenn-phyllis",
       name: "Glenn y Phyllis",
-      role: "Con quienes trabaja y hace vida",
+      role: "Con quienes trabajas y haces vida",
       // Sus palabras exactas, en inglés.
       phrase: "The first time we saw you in San Miguel, I fell in love with you instantly.",
       video: "glenn-phyllis.mp4",
@@ -247,7 +248,7 @@ const CONTENT = {
     {
       slug: "rey",
       name: "Rey",
-      role: "Amigo",
+      role: "Tu primo canadiense",
       phrase: "Cuando te veo, veo un reflejo de este Señor tan hermoso que tenemos.",
       video: "rey.mp4",
       poster: "rey.jpg",
@@ -259,7 +260,7 @@ const CONTENT = {
       name: "Ab y Alexia",
       // Ab: "siempre ha sido una muy linda prima para mí". Los dos dicen
       // lo mismo: "verte crecer". La frase es de Alexia.
-      role: "Sus primos, que la vieron crecer",
+      role: "Tus primos, que te vieron crecer",
       phrase: "Gracias por todo lo que tienes para darnos cuando a veces ni siquiera sabemos que lo necesitamos.",
       video: "ab-alexia.mp4",
       poster: "ab-alexia.jpg",
@@ -270,13 +271,10 @@ const CONTENT = {
       slug: "john",
       name: "Jonathan",
       // Igual que firma la carta, en tercera persona.
-      role: "Su oso herm, prometido y novio",
-      // Escogí una frase que NO está ya escrita en la página. En el
-      // video también dice "me encanta ser testigo de tu vida" y "la
-      // aventura más increíble después de Jesús", y las dos ya están
-      // arriba en la sección 02, escritas por él sin saber que las iba
-      // a decir en voz alta.
-      phrase: "Amo lo fuerte y tierna que puedes ser al mismo tiempo.",
+      role: "Tu oso herm, prometido y novio",
+      // Esta la escribió él, no sale en el video. Es la única frase de
+      // toda la página que no es una cita: su tarjeta, sus palabras.
+      phrase: "Eres la faceta de Dios que quiero admirar el resto de mi vida.",
       video: "john.mp4",
       poster: "john.jpg",
       accent: "azure",
@@ -316,7 +314,7 @@ const CONTENT = {
     next: "Siguiente",
     notFilmed: "Este todavía no se ha grabado.",
     writtenLabel: "En sus propias palabras:",
-    photoAlt: "Foto suya",
+    photoAlt: "Foto tuya",
   },
 
   footer: "hecho a mano · 2026",

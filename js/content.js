@@ -266,6 +266,22 @@ const CONTENT = {
       accent: "sky",
       shape: "pebbles",
     },
+    {
+      slug: "john",
+      name: "Jonathan",
+      // Igual que firma la carta, en tercera persona.
+      role: "Su oso herm, prometido y novio",
+      // Escogí una frase que NO está ya escrita en la página. En el
+      // video también dice "me encanta ser testigo de tu vida" y "la
+      // aventura más increíble después de Jesús", y las dos ya están
+      // arriba en la sección 02, escritas por él sin saber que las iba
+      // a decir en voz alta.
+      phrase: "Amo lo fuerte y tierna que puedes ser al mismo tiempo.",
+      video: "john.mp4",
+      poster: "john.jpg",
+      accent: "azure",
+      shape: "arch",
+    },
   ],
 
   /* ---- 5. TU CARTA ------------------------------------- */

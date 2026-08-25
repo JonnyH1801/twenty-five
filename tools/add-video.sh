@@ -3,8 +3,14 @@
 #  add-video.sh  —  drop a friend's raw clip in, get a web-ready
 #                   video + poster frame out.
 #
-#  usage:   ./tools/add-video.sh <raw-clip> <slug> [poster-seconds]
+#  usage:   ./tools/add-video.sh <raw-clip> <slug> [poster-seconds] [crf]
 #  example: ./tools/add-video.sh ~/Desktop/sofia.MOV sofia
+#           ./tools/add-video.sh ~/Desktop/long.MOV long 5 30
+#
+#  crf is the quality dial: lower is bigger and sharper. 26 is the
+#  default and right for most clips. Push it to 30 for anything past
+#  about three minutes, which halves the file with no visible cost on a
+#  talking head. Yec's video went 38MB -> 21.7MB that way.
 #
 #  Keep the raw clip OUTSIDE media/videos/. That is where this script
 #  writes, and on a case-insensitive disk Sofia.mp4 and sofia.mp4 are one
@@ -20,6 +26,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC="${1:-}"
 SLUG="${2:-}"
 AT="${3:-1}"
+CRF="${4:-26}"
 
 if [[ -z "$SRC" || -z "$SLUG" ]]; then
   echo "usage: ./tools/add-video.sh <raw-clip> <slug> [poster-seconds]" >&2
@@ -76,7 +83,7 @@ echo "→ compressing $(basename "$SRC") ..."
 ffmpeg -y -loglevel error -stats -i "$SRC" \
   -vf "scale=w='min(1280,iw)':h='min(1280,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2" \
   -r 30 \
-  -c:v libx264 -profile:v high -level 4.0 -preset slow -crf 26 -pix_fmt yuv420p \
+  -c:v libx264 -profile:v high -level 4.0 -preset slow -crf "$CRF" -pix_fmt yuv420p \
   -c:a aac -b:a 128k -ac 2 \
   -movflags +faststart \
   "$VID"

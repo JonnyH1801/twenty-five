@@ -268,12 +268,23 @@ const CONTENT = {
       shape: "pebbles",
     },
     {
+      slug: "abraham-irma",
+      name: "Abraham e Irma",
+      role: "Los papás de Jonathan",
+      // "una hija hermosa para nosotros", en sus palabras.
+      phrase: "Eres parte de nuestra familia. Una hija hermosa para nosotros.",
+      video: "abraham-irma.mp4",
+      poster: "abraham-irma.jpg",
+      accent: "cornflower",
+      shape: "grain",
+    },
+    {
       slug: "john",
       name: "Jonathan",
       // Igual que firma la carta, en tercera persona.
       role: "Tu oso herm, prometido y novio",
-      // Esta la escribió él, no sale en el video. Es la única frase de
-      // toda la página que no es una cita: su tarjeta, sus palabras.
+      // Grabó el video de nuevo y ahora sí la dice, en el minuto 1:27.
+      // Ya no es la excepción: es una cita como todas las demás.
       phrase: "Eres la faceta de Dios que quiero admirar el resto de mi vida.",
       video: "john.mp4",
       poster: "john.jpg",

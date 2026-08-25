@@ -270,7 +270,7 @@ const CONTENT = {
     {
       slug: "abraham-irma",
       name: "Abraham e Irma",
-      role: "Los papás de Jonathan",
+      role: "Líderes y amigos que te han visto crecer",
       // "una hija hermosa para nosotros", en sus palabras.
       phrase: "Eres parte de nuestra familia. Una hija hermosa para nosotros.",
       video: "abraham-irma.mp4",

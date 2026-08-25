@@ -244,6 +244,28 @@ const CONTENT = {
       accent: "cornflower",
       shape: "rings",
     },
+    {
+      slug: "rey",
+      name: "Rey",
+      role: "Amigo",
+      phrase: "Cuando te veo, veo un reflejo de este Señor tan hermoso que tenemos.",
+      video: "rey.mp4",
+      poster: "rey.jpg",
+      accent: "cream",
+      shape: "dome",
+    },
+    {
+      slug: "ab-alexia",
+      name: "Ab y Alexia",
+      // Ab: "siempre ha sido una muy linda prima para mí". Los dos dicen
+      // lo mismo: "verte crecer". La frase es de Alexia.
+      role: "Sus primos, que la vieron crecer",
+      phrase: "Gracias por todo lo que tienes para darnos cuando a veces ni siquiera sabemos que lo necesitamos.",
+      video: "ab-alexia.mp4",
+      poster: "ab-alexia.jpg",
+      accent: "sky",
+      shape: "pebbles",
+    },
   ],
 
   /* ---- 5. TU CARTA ------------------------------------- */

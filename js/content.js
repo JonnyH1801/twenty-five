@@ -268,6 +268,28 @@ const CONTENT = {
       shape: "pebbles",
     },
     {
+      slug: "sandy",
+      name: "Sandy",
+      role: "Tu tía",
+      phrase: "Iluminas de verdad la vida de quien te rodea.",
+      video: "sandy.mp4",
+      poster: "sandy.jpg",
+      accent: "azure",
+      shape: "arch",
+    },
+    {
+      slug: "aleiah",
+      name: "Aleiah",
+      role: "Tu sobrina consentida",
+      // Te canta Las Mañanitas entera antes de decir esto. Vale la pena
+      // el video completo: la frase es lo poco que dice sin cantar.
+      phrase: "Te amo, te amo. Besos, besos.",
+      video: "aleiah.mp4",
+      poster: "aleiah.jpg",
+      accent: "cream",
+      shape: "stipple",
+    },
+    {
       slug: "abraham-irma",
       name: "Abraham e Irma",
       role: "Líderes y amigos que te han visto crecer",

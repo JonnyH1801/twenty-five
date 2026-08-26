@@ -224,6 +224,29 @@ const CONTENT = {
       shape: "grain",
     },
     {
+      slug: "are",
+      name: "Are",
+      role: "Tu jefa, y después tu amiga",
+      // De los años en que trabajaban juntas, atoradas en el tráfico.
+      phrase: "Dios puso en ti el don de encontrar el oro en las personas.",
+      video: "are.mp4",
+      poster: "are.jpg",
+      accent: "sky",
+      shape: "rings",
+    },
+    {
+      slug: "bridgett",
+      name: "Bridgett",
+      role: "Amiga, y tu roomie de crucero",
+      phrase:
+        "My favorite thing about you is your intentionality, your kindness, " +
+        "your love for all of your friends.",
+      video: "bridgett.mp4",
+      poster: "bridgett.jpg",
+      accent: "cornflower",
+      shape: "pebbles",
+    },
+    {
       slug: "glenn-phyllis",
       name: "Glenn y Phyllis",
       role: "Con quienes trabajas y haces vida",
@@ -266,6 +289,26 @@ const CONTENT = {
       poster: "ab-alexia.jpg",
       accent: "sky",
       shape: "pebbles",
+    },
+    {
+      slug: "sebas",
+      name: "Sebas",
+      role: "Tu primo, desde que naciste",
+      phrase: "No le tienes miedo a nada. Te atreves, y nada te detiene.",
+      video: "sebas.mp4",
+      poster: "sebas.jpg",
+      accent: "cream",
+      shape: "grain",
+    },
+    {
+      slug: "mafer",
+      name: "Mafer",
+      role: "Amiga, y la novia de Sebas",
+      phrase: "Un abrazo de amiga, pero de hermana, pero de mamá.",
+      video: "mafer.mp4",
+      poster: "mafer.jpg",
+      accent: "azure",
+      shape: "dome",
     },
     {
       slug: "sandy",

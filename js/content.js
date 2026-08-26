@@ -366,7 +366,7 @@ const CONTENT = {
       "Estos videos van a estar aquí siempre. Son para que recuerdes lo " +
         "increíble que eres y cómo tu vida ha impactado a otros de formas tan " +
         "grandes y significativas.",
-      "No estás sola: tienes toda una nube de testigos echándote porras, " +
+      "Tienes toda una nube de testigos echándote porras, " +
         "listos para celebrar tu vida tan bien vivida cada día.",
     ],
     note: "Puedes ver todos estos videos cuando quieras haciendo tap en las placas.",

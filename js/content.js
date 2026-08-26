@@ -226,7 +226,7 @@ const CONTENT = {
     {
       slug: "are",
       name: "Are",
-      role: "Tu jefa, y después tu amiga",
+      role: "Tu gran amiga y antigua jefa",
       // De los años en que trabajaban juntas, atoradas en el tráfico.
       phrase: "Dios puso en ti el don de encontrar el oro en las personas.",
       video: "are.mp4",
@@ -303,7 +303,7 @@ const CONTENT = {
     {
       slug: "mafer",
       name: "Mafer",
-      role: "Amiga, y la novia de Sebas",
+      role: "Tu buena amiga, pronto cuñada",
       phrase: "Un abrazo de amiga, pero de hermana, pero de mamá.",
       video: "mafer.mp4",
       poster: "mafer.jpg",

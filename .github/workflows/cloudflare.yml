@@ -1,0 +1,31 @@
+# El uplink de casa va a 85 KB/s y se corta a media subida, así que
+# el deploy lo hace un runner de GitHub: de servidor a servidor, sin
+# pasar por esta computadora. La máquina puede estar apagada.
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage only the site files
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude '.git/' --exclude '.github/' --exclude '_source/' \
+            --exclude '.claude/' --exclude 'tools/' --exclude '_site/' \
+            --exclude '*.md' --exclude '.gitignore' \
+            ./ _site/
+          echo "staged $(find _site -type f | wc -l) files, $(du -sh _site | cut -f1)"
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ae7c50560336b70e34e6f2309581b155
+          command: pages deploy _site --project-name twenty-five --branch main --commit-dirty=true

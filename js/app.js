@@ -41,6 +41,7 @@
   document.title = C.tabTitle || document.title;
 
   var UI = C.ui || {};
+  var SOLO = C.soloMode === true;
   $("#playerBack").textContent = UI.back || "";
   $("#prevBtn").textContent = UI.prev || "";
   $("#nextBtn").textContent = UI.next || "";
@@ -251,7 +252,7 @@
     player.hidden = true;
     document.body.classList.remove("is-locked");
     current = -1;
-    if (!silent) {
+    if (!silent && !SOLO) {
       history.replaceState(null, "", location.pathname + location.search + "#voices");
       var t = $("#voices");
       if (t) t.scrollIntoView({ behavior: "auto", block: "start" });
@@ -267,10 +268,26 @@
   $("#playerClose").addEventListener("click", function () { closePlayer(); });
   document.addEventListener("keydown", function (e) {
     if (player.hidden) return;
+    if (SOLO) return;
     if (e.key === "Escape") closePlayer();
     if (e.key === "ArrowRight" && !nextBtn.disabled) nextBtn.click();
     if (e.key === "ArrowLeft" && !prevBtn.disabled) prevBtn.click();
   });
+
+  // Modo de un solo video. Las placas se van entregando a lo largo del
+  // día, así que un video no debe delatar a los que siguen: se cierran
+  // las cuatro salidas, no nada más el botón de regreso.
+  if (SOLO) {
+    $("#playerClose").hidden = true;
+    var pager = $(".player__pager");
+    if (pager) pager.hidden = true;
+    var vsec = $("#voices");
+    if (vsec) vsec.hidden = true;
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-nav][href="#voices"]'),
+      function (a) { a.hidden = true; }
+    );
+  }
 
   /* ---- the router: #/from/<slug> ---- */
   function route() {
@@ -280,8 +297,10 @@
     if (i === -1) {
       // Unknown tag. Never leave her looking at a blank screen.
       closePlayer(true);
-      var v = $("#voices");
-      if (v) v.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (!SOLO) {
+        var v = $("#voices");
+        if (v) v.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
       return;
     }
     openFriend(i);

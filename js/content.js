@@ -5,6 +5,17 @@
    ============================================================ */
 
 const CONTENT = {
+  /* ---- 0. EL INTERRUPTOR DEL DÍA ----------------------
+     Hoy le vas dando las placas una por una, así que la galería
+     completa se queda cerrada: cada placa abre SU video y nada más.
+     Con esto en true se esconden las cuatro salidas — el botón de
+     "todas las voces", los botones de anterior/siguiente, la sección
+     03 entera y su liga en el menú.
+
+     Cuando ya le hayas dado todas, ponlo en false, corre
+     ./tools/bump.sh y haz push. Ahí se abre la galería completa.  */
+  soloMode: true,
+
 
   /* ---- LO BÁSICO --------------------------------------- */
   name: "Amor",

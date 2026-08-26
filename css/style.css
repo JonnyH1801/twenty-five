@@ -622,6 +622,9 @@ body.is-loading .cue{opacity:0}
   border-radius:16px 3px 16px 3px;
 }
 .player__written[hidden]{display:none}
+/* Modo de un solo video: estas dos llevan display propio, así que
+   [hidden] por sí solo no las apaga. */
+.player__close[hidden],.player__pager[hidden],.voices[hidden]{display:none}
 .player__writtenLabel{
   margin:0 0 .6rem;color:var(--iron);
   font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;

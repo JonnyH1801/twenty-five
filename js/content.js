@@ -96,6 +96,7 @@ const CONTENT = {
       "voz alta.",
     lockedLabel: "Video en camino",
     playLabel: "Reproducir",
+    listenLabel: "Escuchar",
   },
 
   /* ---- 4. LA GENTE + SUS VIDEOS ------------------------ */
@@ -300,6 +301,16 @@ const CONTENT = {
       shape: "pebbles",
     },
     {
+      slug: "lulu",
+      name: "Lulu",
+      role: "Tu prima",
+      // Mandó un audio, no un video: es la única placa de voz de la caja.
+      phrase: "Un enorme abrazo hasta verte. Que no se termine hasta verte.",
+      audio: "lulu.mp3",
+      accent: "sky",
+      shape: "rings",
+    },
+    {
       slug: "sebas",
       name: "Sebas",
       role: "Tu primo, desde que naciste",
@@ -400,6 +411,7 @@ const CONTENT = {
     notFilmed: "Este todavía no se ha grabado.",
     writtenLabel: "En sus propias palabras:",
     photoAlt: "Foto tuya",
+    audioLabel: "Mensaje de voz",
   },
 
   footer: "hecho a mano · 2026",

@@ -566,6 +566,63 @@ body.is-loading .cue{opacity:0}
   width:100%;height:auto;display:block;
   max-height:72svh;object-fit:contain;background:var(--ink);
 }
+/* ---- LA PLACA DE VOZ ---------------------------------------
+   Lulu mandó un mensaje de voz, no un video. Fingir un reproductor de
+   video con la pantalla en negro se ve como algo roto; esto se ve como
+   lo que es. Los anillos respiran solo mientras suena su voz. */
+.player__stage--audio{background:var(--prussian)}
+.audioCard{
+  position:relative;overflow:hidden;isolation:isolate;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(1.4rem,4vw,2rem);
+  padding:clamp(2.6rem,9vw,4.2rem) clamp(1.2rem,5vw,2.4rem);
+  background:
+    radial-gradient(120% 90% at 50% 12%,
+      color-mix(in oklch,var(--marine) 62%,transparent) 0%,
+      transparent 68%),
+    var(--prussian);
+}
+.audioCard__bot{
+  position:absolute;inset:auto -14% -32% auto;width:min(62%,320px);aspect-ratio:1;
+  opacity:.16;pointer-events:none;z-index:-1;
+}
+/* Tres anillos concéntricos, quietos por defecto. */
+.audioCard__pulse{
+  position:relative;width:clamp(104px,30vw,152px);aspect-ratio:1;
+  display:grid;place-items:center;
+}
+.audioCard__ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid color-mix(in oklch,var(--wash) 46%,transparent);
+  scale:.42;opacity:.9;
+}
+.audioCard__pulse::after{
+  content:"";width:26%;aspect-ratio:1;border-radius:50%;
+  background:var(--iron);
+  box-shadow:0 0 0 8px color-mix(in oklch,var(--iron) 18%,transparent);
+}
+.is-playing .audioCard__ring{animation:listen 3.4s cubic-bezier(.22,.61,.36,1) infinite}
+.is-playing .audioCard__ring:nth-child(2){animation-delay:1.13s}
+.is-playing .audioCard__ring:nth-child(3){animation-delay:2.26s}
+@keyframes listen{
+  from{scale:.42;opacity:.9}
+  to{scale:1.18;opacity:0}
+}
+.audioCard__label{
+  margin:0;font-family:var(--sans);font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:color-mix(in oklch,var(--pale) 74%,transparent);
+}
+/* Controles nativos a propósito: son los que ella ya sabe usar y los
+   únicos que funcionan igual en todos los teléfonos. Solo se asientan
+   sobre la placa para que no floten como algo pegado encima. */
+.audioCard__player{
+  width:min(100%,420px);height:40px;border-radius:99px;
+  box-shadow:0 10px 30px color-mix(in oklch,var(--ink) 55%,transparent);
+}
+@media (prefers-reduced-motion:reduce){
+  .is-playing .audioCard__ring{animation:none}
+}
 .player__missing{
   padding:clamp(2.5rem,10vw,4rem) 1.5rem;text-align:center;
   background:var(--prussian);color:var(--pale);

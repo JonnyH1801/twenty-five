@@ -14,6 +14,7 @@
   var C = window.CONTENT || CONTENT;
   var VIDEO_DIR = "media/videos/";
   var POSTER_DIR = "media/posters/";
+  var AUDIO_DIR = "media/audio/";
   var SHAPES = ["arch", "grain", "pebbles", "dome", "rings", "stipple"];
   var CALM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -155,7 +156,10 @@
       var li = el("li", "reveal");
       var btn = el("button", "card card--" + (f.accent || "sky"));
       btn.type = "button";
-      if (!f.video) btn.className += " is-locked";
+      // Una placa cuenta como grabada si trae video O audio. Lulu mandó
+      // un mensaje de voz, y su tarjeta no debe verse apagada por eso.
+      var hasMedia = !!(f.video || f.audio);
+      if (!hasMedia) btn.className += " is-locked";
 
       var shape = f.shape && SHAPES.indexOf(f.shape) > -1 ? f.shape : SHAPES[i % SHAPES.length];
       var mark = el("span", "bot bot--" + shape + " card__bot");
@@ -168,10 +172,13 @@
 
       var foot = el("div", "card__foot");
       foot.appendChild(el("span", "card__play"));
-      foot.appendChild(el("span", null, f.video ? (V.playLabel || "") : (V.lockedLabel || "")));
+      var footLabel = f.audio ? (V.listenLabel || V.playLabel || "")
+                    : f.video ? (V.playLabel || "")
+                    : (V.lockedLabel || "");
+      foot.appendChild(el("span", null, footLabel));
       btn.appendChild(foot);
 
-      if (f.video) {
+      if (hasMedia) {
         btn.addEventListener("click", function () { location.hash = "#/from/" + f.slug; });
       } else {
         btn.setAttribute("aria-disabled", "true");
@@ -199,8 +206,9 @@
   var current = -1;
 
   function clearStage() {
-    var v = $("video", stage);
+    var v = $("video", stage) || $("audio", stage);
     if (v) { v.pause(); v.removeAttribute("src"); v.load(); }
+    stage.classList.remove("player__stage--audio");
     stage.innerHTML = "";
   }
 
@@ -222,7 +230,32 @@
     writtenTextEl.textContent = f.written || "";
 
     clearStage();
-    if (f.video) {
+    if (f.audio) {
+      // Un mensaje de voz no es un video sin imagen: es otra cosa. En vez
+      // de fingir un cuadro negro con botón de play, la placa se abre en
+      // un panel de cianotipia que respira mientras ella escucha.
+      var wrap = el("div", "audioCard");
+      wrap.appendChild(el("span", "bot bot--rings audioCard__bot"));
+      var pulse = el("div", "audioCard__pulse");
+      pulse.appendChild(el("span", "audioCard__ring"));
+      pulse.appendChild(el("span", "audioCard__ring"));
+      pulse.appendChild(el("span", "audioCard__ring"));
+      wrap.appendChild(pulse);
+      wrap.appendChild(el("p", "audioCard__label", UI.audioLabel || ""));
+
+      var a = document.createElement("audio");
+      a.src = AUDIO_DIR + f.audio;
+      a.controls = true;
+      a.preload = "metadata";
+      a.className = "audioCard__player";
+      a.addEventListener("play", function () { wrap.classList.add("is-playing"); });
+      ["pause", "ended"].forEach(function (e) {
+        a.addEventListener(e, function () { wrap.classList.remove("is-playing"); });
+      });
+      wrap.appendChild(a);
+      stage.appendChild(wrap);
+      stage.classList.add("player__stage--audio");
+    } else if (f.video) {
       var v = document.createElement("video");
       v.src = VIDEO_DIR + f.video;
       v.controls = true;
